@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	{% block head_links %}
+  	{% load staticfiles %}
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'Thread/images/waterly.png' %}"/>
+    <link href="{% static 'Thread/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'Thread/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'Thread/css/animate.css' %}" rel="stylesheet">
+    {% endblock head_links %}
+  </head>
+
+  	{% block content %}
+  
+
+	  {% endblock content %}
+
+
+	{% block javascript_tag %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'Thread/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Thread/js/custom.js' %}"></script>
+    {% endblock javascript_tag %}
+
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head><title>Forum</title>
+<script>
+function edit(id){
+    //remove paragraph
+    post_to_edit = document.getElementById(id);
+    old_text = post_to_edit.innerHTML;
+    post_to_edit.innerHTML = '';
+
+    //make text area
+    textarea = document.getElementById('div'+id);
+    console.log(old_text);
+    textarea.innerHTML="<textarea form=\"form"+id+"\" name=new_text>"+old_text+"</textarea>";
+
+    //change where the form goes
+    form=document.getElementById('form'+id);
+    form.action="/edit-post/";
+
+    //update the vairable name to edit
+    id_name = document.getElementById('item'+id);
+    id_name.name = "edit_id";
+
+    //update todo
+    todo = document.getElementById('todo'+id);
+    todo.name = "edit_post"
+
+    //update submit
+    submit = document.getElementById('submit'+id)
+    submit.value = "Confirm"
+
+    //update script button
+    script_button = document.getElementById('script_button'+id);
+    script_button.innerHTML = "cancel";
+    script_button.onclick = function(){cancel();};
+}
+
+function cancel(){
+    location.reload()
+}
+</script>
+</head>
+    <body>
+        <form action="/logout/" method="post">
+            {% csrf_token %}
+            {% if user.is_anonymous %}
+            <input type="submit" value="login">
+            <input type="hidden" name="todo" value = "redirect">
+            {% else %}
+            <input type="submit" value="logout">
+            <input type="hidden" name="todo" value = "logout">
+            {% endif %}
+        </form>
+        {% if not user.is_anonymous %}
+        <a href="/edit-profile">
+                <button>Edit Profile</button>
+        </a>
+        {% endif %}
+        <br>
+        <hr>
+        {% for p in posts %}
+            <b>{{p.username}}</b> wrote at <b>{{p.time}}</b>:
+            <p id={{p.id}}>{{p.text}}</p>
+
+            {# let users only delete their own post #}
+
+            {% ifequal user.username p.username %}
+            <div id="div{{p.id}}"></div>
+            <form name="delete" action="" method="post" id="form{{p.id}}">
+                {% csrf_token %}
+                <input type="hidden" name="del_id" value={{p.id}} id="item{{p.id}}">
+                <input type="hidden" name="todo" value="del" id="todo{{p.id}}">
+                <input type="submit" name="delete_button" value="delete" id="submit{{p.id}}">
+                <button type="button" onclick="edit({{p.id}})" id="script_button{{p.id}}">Edit</button>
+            </form>
+            {% endifequal %}
+            <hr>
+        {% empty %}
+            <h4>Nobody has written anything yet!</h4>
+        {% endfor %}
+        {% if not anon %}
+        <form name="post" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="todo" value="add">
+            <input type="submit" name="post_button" value="post">
+        </form><br>
+        {% endif %}
+    </body>
+</html>

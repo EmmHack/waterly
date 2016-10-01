@@ -1,0 +1,65 @@
+{% extends "Thread/base.html" %}
+
+<title>Waterly | Home </title>
+
+{% block content %}
+
+<body class="login-bg">
+    <div class="header">
+       <div class="container">
+          <div class="row" style="margin-left: 44%;">
+             <div class="col-md-12">
+                <!-- Logo -->
+                <div class="logo">
+                   <h1><a href="/">Waterly</a></h1>
+                </div>
+             </div>
+          </div>
+       </div>
+  </div>
+  <div class="page-content container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 animated zoomIn">
+        <div class="login-wrapper">
+              <div class="box">
+                  <div class="content-wrap">
+
+                      {% if form.errors %}
+                        <p class="error">Sorry, that's not a valid username or password</p>
+                      {% endif %}
+
+                      <p>Welcome to the Waterly</p>
+                      {% if in_or_out %}
+                      <p><b>logged out successfully</b><p>
+                      {% endif %}
+
+                      {% if reg %}
+                      <p id='register'><b>REGISTERED</b><p>
+                      {% endif %}
+
+                      {% if not valid %}
+                      <p id='invalid' style="color:red"><b>INVALID USERNAME OR PASSWORD</b><p>
+                      {% endif %}
+
+                      <form action="/login/?next={{next}}" method="post">
+                        {% csrf_token %}
+                        <input type="text" class="form-control text-center" name="username" value="" id="username" placeholder="Username">
+                        <input type="password" class="form-control text-center" name="password" value="" id="password" placeholder="Password">
+                        <input type="submit" value="Login" class="btn btn-primary btn-lg btn-block" />
+                      </form>
+                      
+                      <hr />
+                
+                  </div>
+              </div>
+
+              <div class="already">
+                  <p>Don't have an account yet?</p>
+                  <a href="/register/">Sign Up</a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}
