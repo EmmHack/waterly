@@ -10,7 +10,7 @@ from api.serialisers import ConsumerSerialiser, ConsumptionSerialiser, \
     AddressSerialiser, AvgMunicConsumptionSerialiser, AvgMunicConsumption
 
 
-class ListCreateConsumptionReadings(generics.ListCreateAPIView):
+class CreateConsumptionReadings(generics.CreateAPIView):
     """Get consumption data for particular consumer in the city.
     
     """
@@ -112,6 +112,12 @@ class GetConsumers(generics.ListAPIView):
 
     queryset = Consumer.objects.all()
     serializer_class = ConsumerSerialiser
+
+
+class ListCreateConsumptionReadings(generics.ListAPIView):
+
+    queryset = Consumption.objects.all().order_by('reading')
+    serializer_class = ConsumptionSerialiser
 
 
 class AddListConsumers(generics.ListCreateAPIView):

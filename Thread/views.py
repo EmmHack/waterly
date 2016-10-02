@@ -7,26 +7,22 @@ from Thread.models import Post
 from forms import *
 from django.contrib.auth.models import User
 
-def login(request, in_or_out):
-    out = True if "out" in in_or_out else False
-    ignore = (request.POST.get('todo') == 'redirect')
-    if ignore:
-        out = False
-    reg = request.GET.get('reg', False)
-    next = request.GET.get(u'next', '/app/')
-    valid = True
-    if request.POST and not out and not ignore:
-        username = request.POST.get('username', '')
-        password = request.POST.get('password', '')
-        user = auth.authenticate(username=username, password=password)
-        if user is not None and user.is_active:
-            auth.login(request, user)
-            return HttpResponseRedirect(next)
-        else:
-            valid = False
-    if "out" in in_or_out and not ignore:
-        auth.logout(request)
-    return render(request, 'Thread/login.html', {'in_or_out': out, 'reg': reg, 'valid': valid, 'next': next})
+def home(request):
+    return render(request,'Thread/index.html')
+
+def login(request):
+    error = ""
+    if request.method =='POST':
+        #username = request.POST.get('username', '')
+        #password = request.POST.get('password', '')
+        #user = auth.authenticate(username=username, password=password)
+        #if user is not None and user.is_active:
+        #    auth.login(request, user)
+        return render(request,'Thread/index.html')
+        #else:
+        #  error = "invalid password or username"
+        #  auth.logout(request)
+    return render(request, 'Thread/login.html',{'error':error})
 
 
 def register(request):

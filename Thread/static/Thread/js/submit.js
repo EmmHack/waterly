@@ -7,6 +7,8 @@
  */
 
 $(document).ready(function() {
+
+
     
     $(document).on('submit', '#meterForm', function()
     {

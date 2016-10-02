@@ -1,6 +1,88 @@
 $(function() {
     var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
 
+
+    var consumers = null;
+    
+    url = 'api/consumers/'
+    $.ajax({
+        type : 'GET',
+        url  : url,
+        async: false,
+        success :  function(data){
+            consumers = data;
+        }
+    });
+
+
+    var consumptions = null;
+    
+    url = 'api/read_consumption_readings/'
+    $.ajax({
+        type : 'GET',
+        url  : url,
+        async: false,
+        success :  function(data){
+            consumptions = data;
+        }
+    });
+
+    var data = []
+    for (var i = 0; i < 5; i++) {
+         var d = {}
+         d['reading'] = consumptions[i]['reading'];
+         d['meter_no'] = consumptions[i]['consumer']
+         data.push(d);
+    }
+
+    
+    for (var i = 0; i < consumers.length; i++) {
+        for (var j = 0; j < data.length; j++) {
+            if (data[j]['meter_no'] === consumers[i]['meter_no']) {
+                data[j]['name'] = consumers[i]['name'];
+            }
+        }
+    }
+
+
+    $('#dataTables_empty').remove();
+
+
+  
+    for (var i = 0; i < data.length; i++) {
+        if(i < 2){
+            $("#tbl_champs").append("<tr class='success' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }else if (i < 4) {
+            $("#tbl_champs").append("<tr class='warning' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }
+        else {
+            $("#tbl_champs").append("<tr class='danger' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }
+    }
+
+
+    for (var i = 0; i < data.length; i++) {
+        if(i < 2){
+            $("#tbl_overall").append("<tr class='success' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }else if (i < 4) {
+            $("#tbl_overall").append("<tr class='warning' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }
+        else {
+            $("#tbl_overall").append("<tr class='danger' ><td>" + (i+1) + "</td><td>" +
+                                 data[i]['name'] + "</td><td>" +
+                                 data[i]['reading'] + "</td></tr>");
+        }
+    }
     $.plot("#catchart", [ data ], {
         series: {
             bars: {
