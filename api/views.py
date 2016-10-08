@@ -101,6 +101,19 @@ class ListAvgMunicConsumption(generics.ListAPIView):
         return queryset
 
 
+class Hope(generics.ListAPIView):
+    """Get consumer entries from the api.
+    
+    Attributes:
+        queryset (models): All consumers.
+        serializer_class (object): Serializer (json)
+            
+    """
+
+    queryset = AvgMunicConsumption.objects.all()
+    serializer_class = AvgMunicConsumptionSerialiser
+
+
 class GetConsumers(generics.ListAPIView):
     """Get consumer entries from the api.
     

@@ -14,16 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from Thread.views import login, register,thread,home
+from app.views import login, register,thread,home
 from django.contrib import admin
+from app.views import GenerateRandomData, UploadFixture
 
 urlpatterns = [
 
     url(r'^$',home),
-    url(r'^app',thread),
-    url(r'^(?:accounts/){0,1}log((?:in)|(?:out))/{0,1}$', login),
-    url(r'^(?:app)|(?:thread)/{0,1}$', thread),
-    url(r'^signup/{0,1}$', register),
     url(r'^api/',include('api.urls')),
+    #url(r'^app/',thread),
+    url(r'^app/gen_rand_data$', GenerateRandomData.as_view(),
+        name='gen_rand_data'),
+    url(r'^app/upload_fixture$', UploadFixture.as_view(),
+        name='upload_fixture'),
+    #url(r'^(?:accounts/){0,1}log((?:in)|(?:out))/{0,1}$', login),
+    #url(r'^(?:app)|(?:thread)/{0,1}$', thread),
+    url(r'^signup/{0,1}$', register),
     url(r'^admin/', admin.site.urls),
 ]

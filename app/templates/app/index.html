@@ -5,16 +5,24 @@
     <title>Waterly | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="shortcut icon" type="image/png" href="{% static 'Thread/images/waterly.png' %}"/>
+    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/waterly.png' %}"/>
     
     <!-- Bootstrap -->
-    <link href="{% static 'Thread/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
     <!-- styles -->
-    <link href="{% static 'Thread/css/styles.css' %}" rel="stylesheet">
-    <link href="{% static 'Thread/css/animate.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'Thread/vendors/morris/morris.css' %}">
-    <link href="{% static 'Thread/vendors/datatables/dataTables.bootstrap.css' %}" rel="stylesheet" media="screen">
-    
+    <link href="{% static 'app/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/animate.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app/vendors/morris/morris.css' %}">
+    <link href="{% static 'app/vendors/datatables/dataTables.bootstrap.css' %}" rel="stylesheet" media="screen">
+<style> /* set the CSS */
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+</style>
     <script>
         function showDashboard()
         {            
@@ -162,14 +170,14 @@
                             
                             <div class="content-box-large animated zoomInDown">
   				<div class="panel-heading ">
-                                    <div class="panel-title"><strong>You versus the Champions</strong></div>
-					
+                                    <div class="panel-title"><strong>Your Consumption Trend</strong></div>
+				
 					<div class="panel-options">
 						<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
 					</div>
 				</div>
   				<div class="panel-body animated bounceInUp">
-  					<div id="hero-area" style="height: 230px;"></div>
+                    <svg class="plot" width="960" height="500"></svg>
   				</div>
   			</div>
                             
@@ -214,11 +222,11 @@
 		  	<div class="row" id="leaderBoardPage">
                             
                             <div class="row animated fadeInDown">
-  				<div class="col-md-6">
+  				<div class="col-md-12">
                                     <div class="content-box-large">
                                         <div class="panel-heading">
                                             <div class="panel-title text-center">
-                                                Our Top Waterly Citizens <br />
+                                                Our Top Waterly Citizens
                                                 Click to discover how they do it...
                                             </div>
                                             <div class="panel-options">
@@ -226,7 +234,7 @@
                                             </div>
                                         </div>
                                         <div class="panel-body">
-                                            <table class="table">
+                                            <table id="tbl_overall1" class="table">
 				              <thead>
 				                <tr>
 				                  <th>Ranking</th>
@@ -235,76 +243,11 @@
 				                </tr>
 				              </thead>
 				              <tbody>
-                                                  <tr class="success" onclick="showLeader()">
-				                  <td>1</td>
-				                  <td>Mark Otto</td>
-				                  <td>@mdo</td>
-				                </tr>
-				                <tr class="success">
-				                  <td>2</td>
-				                  <td>Jacob</td>
-				                  <td>@fat</td>
-				                </tr>
-				                <tr class="success">
-				                  <td>3</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>4</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>5</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>6</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>7</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="danger">
-				                  <td>8</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="danger">
-				                  <td>9</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
-				                <tr class="danger">
-				                  <td>10</td>
-				                  <td>Larry</td>
-				                  <td>@twitter</td>
-				                </tr>
 				              </tbody>
 				            </table>
 		  				</div>
 		  			</div>
   				</div>
-  				<div class="col-md-6 animated bounceIn" id="leader">
-  					<div class="content-box-large">
-		  				<div class="panel-heading">
-                                                    <div class="panel-title text-center">Mark Otto</div>
-							
-							<div class="panel-options">
-								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-							</div>
-						</div>
-		  				<div class="panel-body">
-		  					<div id="catchart" style="width:100%;height:300px"></div>
-		  				</div>
-		  			</div>
-  				</div>
-  			</div>
                             
 		  	</div>
 		</div>
@@ -322,32 +265,33 @@
       </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'Thread/js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'app/js/jquery-2.1.3.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'Thread/vendors/morris/morris.min.js' %}"></script>
-    <script src="{% static 'Thread/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'Thread/js/custom.js' %}"></script>
-    <script src="{% static 'Thread/js/submit.js' %}"></script>
-    <script src="{% static 'Thread/vendors/datatables/js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'Thread/js/stats.js' %}"></script>
-    
+    <script src="{% static 'app/vendors/morris/morris.min.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/d3.v4.min.js' %}"></script>
+        
+    <script src="{% static 'app/js/custom.js' %}"></script>
+    <script src="{% static 'app/js/submit.js' %}"></script>
+    <script src="{% static 'app/vendors/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'app/js/stats.js' %}"></script>
     
     <!-- jQuery UI -->
-    <script src="{% static 'Thread/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'app/js/jquery-ui.js' %}"></script>
 
-    <script src="{% static 'Thread/vendors/datatables/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'app/vendors/datatables/dataTables.bootstrap.js' %}"></script>
     
-    <script src="{% static 'Thread/js/tables.js' %}"></script>
+    <script src="{% static 'app/js/tables.js' %}"></script>
     
-    <script src="{% static 'Thread/vendors/jquery.knob.js' %}"></script>
-    <script src="{% static 'Thread/vendors/raphael-min.js' %}"></script>
+    <script src="{% static 'app/vendors/jquery.knob.js' %}"></script>
+    <script src="{% static 'app/vendors/raphael-min.js' %}"></script>
 
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.js' %}"></script>
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.categories.js' %}"></script>
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.time.js' %}"></script>
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.stack.js' %}"></script>
-    <script src="{% static 'Thread/vendors/flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.categories.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'app/vendors/flot/jquery.flot.resize.js' %}"></script>
 
   </body>
 </html>

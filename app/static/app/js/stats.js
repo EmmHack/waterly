@@ -1,5 +1,5 @@
-$(function() {
-    var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
+$(function() {  
+    //var data = [ ["January", 10], ["February", 8], ["March", 4], ["April", 13], ["May", 17], ["June", 9] ];
 
 
     var consumers = null;
@@ -27,6 +27,7 @@ $(function() {
         }
     });
 
+
     var data = []
     for (var i = 0; i < 5; i++) {
          var d = {}
@@ -44,8 +45,29 @@ $(function() {
         }
     }
 
+    for (var i = 0; i < consumers.length; i++) {
+        for (var j = 0; j < data.length; j++) {
+            if (data[j]['meter_no'] === consumers[i]['meter_no']) {
+                data[j]['name'] = consumers[i]['name'];
+            }
+        }
+    }
+
+   var names_important = [];
+    for (var i = 7; i < 11; i++) {
+        var d = {};
+        d['reading'] = consumptions[i]['reading'];
+        d['meter_no'] = consumptions[i]['consumer'];        
+        names_important.push(d);
+    
+    }
+
+   console.log(names_important);
+
+
 
     $('#dataTables_empty').remove();
+
 
 
   
@@ -83,6 +105,24 @@ $(function() {
                                  data[i]['reading'] + "</td></tr>");
         }
     }
+
+    for (var i = 0; i < names_important.length; i++) {
+        if(i < 2){
+            $("#tbl_overall1").append("<tr class='success' ><td>" + (i+1) + "</td><td>" +
+                                 names_important[i]['meter_no'] + "</td><td>" +
+                                 names_important[i]['reading'] + "</td></tr>");
+        }else if (i < 4) {
+            $("#tbl_overall1").append("<tr class='warning' ><td>" + (i+1) + "</td><td>" +
+                                 names_important[i]['meter_no'] + "</td><td>" +
+                                 names_important[i]['reading'] + "</td></tr>");
+        }
+        else {
+            $("#tbl_overall1").append("<tr class='danger' ><td>" + (i+1) + "</td><td>" +
+                                 names_important[i]['meter_no'] + "</td><td>" +
+                                 names_important[i]['reading'] + "</td></tr>");
+        }
+    }
+
     $.plot("#catchart", [ data ], {
         series: {
             bars: {
@@ -96,6 +136,103 @@ $(function() {
             tickLength: 0
         }
     });
+
+
+// set the dimensions and margins of the graph
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// parse the date / time
+var parseTime = d3.timeParse("%y-%b-%d");
+
+// set the ranges
+var x = d3.scaleTime().range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
+
+// define the line
+var valueline = d3.line()
+    .x(function(d) { return x(parseTime(d.date)); })
+    .y(function(d) { return y(d.reading); });
+
+// append the svg obgect to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select(".plot")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+var data = consumptions;
+
+   /* '2016-10-16', '2016-10-17', '2016-10-18', '2016-10-19', '2016-10-20',
+    '2016-10-21', '2016-10-22', '2016-10-23', '2016-10-23', '2016-10-24',
+    '2016-10-25', '2016-10-26', '2016-10-27', '2016-10-28', '2016-10-29'];*/
+
+var consumers = null;
+    
+// set the dimensions and margins of the graph
+var margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// parse the date / time
+var parseTime = d3.timeParse("%d-%b-%y");
+
+// set the ranges
+var x = d3.scaleTime().range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
+var time = new Date();
+console.log(time);
+// define the line
+var valueline = d3.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
+
+// append the svg obgect to the body of the page
+// appends a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select(".plot")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("static/data.tsv", function(error, data) {
+  if (error) throw error;
+
+  // format the data
+  data.forEach(function(d) {
+      d.date = parseTime(d.date);
+      d.close = +d.close;
+  });
+
+  // Scale the range of the data
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+  // Add the valueline path.
+  svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", valueline);
+
+  // Add the X Axis
+  svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  // Add the Y Axis
+  svg.append("g")
+      .call(d3.axisLeft(y));
+
+});
+
+
 
     var data = [],
     series = Math.floor(Math.random() * 6) + 3;
@@ -180,7 +317,7 @@ function doPlot(position) {
 
 doPlot("right");
 
-});
+//});
 
 // Morris Bar Chart
 Morris.Bar({
@@ -283,3 +420,4 @@ $(".knob").knob();
 function labelFormatter(label, series) {
     return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
 }
+});
