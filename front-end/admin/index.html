@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Waterly | Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="../images/waterly.png"/>
+    
+    <!-- Bootstrap -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery UI -->
+    <link href="../css/jquery-ui.css" rel="stylesheet" media="screen">
+    
+    <!-- styles -->
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/animate.css " rel="stylesheet">
+    <link href="../css/buttons.css" rel="stylesheet">
+    
+    <script>
+        
+        function byConsumer()
+        {
+            $('#byMunicipality').hide(1000);            
+            $('#bySchool').hide(1000);     
+            $('#byConsumer').show(2000);            
+        }
+        
+        function byMunicipality()
+        {
+            $('#byConsumer').hide(1000);              
+            $('#bySchool').hide(1000);        
+            $('#byMunicipality').show(2000);
+        }
+        
+        function bySchool()
+        {
+            $('#byMunicipality').hide(1000);
+            $('#byConsumer').hide(1000);            
+            $('#bySchool').show(2000);
+        }
+        
+        
+        function WbyConsumer()
+        {
+            $('#WbyCompany').hide(1000);           
+            $('#WbyConsumer').show(2000);
+        }
+        
+        function WbyCompany()
+        {
+            $('#WbyConsumer').hide(1000);           
+            $('#WbyCompany').show(2000);
+        }
+        
+    </script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<div class="header">
+	     <div class="container">
+	        <div class="row">
+	           <div class="col-md-5">
+	              <!-- Logo -->
+	              <div class="logo">
+	                 <h1><a href="index.html">Waterly</a></h1>
+	              </div>
+	           </div>
+	           <div class="col-md-5">
+	              <div class="row">
+	                <div class="col-lg-12">
+	                  <div class="input-group form">
+	                       <input type="text" class="form-control" placeholder="Search...">
+	                       <span class="input-group-btn">
+	                         <button class="btn btn-primary" type="button">Search</button>
+	                       </span>
+	                  </div>
+	                </div>
+	              </div>
+	           </div>
+	           <div class="col-md-2">
+	              <div class="navbar navbar-inverse" role="banner">
+	                  <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+	                    <ul class="nav navbar-nav">
+	                      <li class="dropdown">
+	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+	                        <ul class="dropdown-menu animated zoomIn">
+	                          <li><a href="profile.html">Profile</a></li>
+	                          <li><a href="login.html">Logout</a></li>
+	                        </ul>
+	                      </li>
+	                    </ul>
+	                  </nav>
+	              </div>
+	           </div>
+	        </div>
+	     </div>
+	</div>
+
+    <div class="page-content">
+    	<div class="row">
+		  <div class="col-md-2 animated bounceIn">
+		  	<div class="sidebar content-box" style="display: block;">
+                <ul class="nav">
+                    <!-- Main menu -->
+                    <li class="current"><a href="../admin/" ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+                    <li><a href="reports.html"><i class="glyphicon glyphicon-stats"></i> Reports </a></li>
+                    <li><a href="prediction.html"><i class="glyphicon glyphicon-signal"></i> Predictions</a></li>
+                    <li><a href="maintenance.html"><i class="glyphicon glyphicon-calendar"></i> Maintenance</a></li>
+                    
+                </ul>
+             </div>
+		  </div>
+		  <div class="col-md-10">
+		  	<div class="row" id="adminLandingPage">                            
+                            <div class="row animated fadeInDown">
+  				<div class="col-md-6">
+                                    <div class="content-box-large">
+                                        <div class="panel-heading">
+                                            <div class="panel-title text-center">Waterly Citizens by Category</div>
+                                            <div class="panel-options">
+                                                <div class="btn-group" style="margin: 0px 10px 10px 0px;">
+                                                    <button type="button" onclick="byCosumer()" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                                      by Consumer <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                                                      <li><a href="">by Consumer</a></li>
+                                                      <li><a href="">by Complex</a></li>
+                                                      <li><a onclick="bySchool()">by School</a></li>
+                                                      <li><a href="#">by Company</a></li>
+                                                      <li><a onclick="byMunicipality()">by Municipality</a></li>
+                                                      <li><a href="#">by Province</a></li>
+                                                    </ul>
+                                                </div>
+						<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body animated zoomInDown" id="byConsumer">
+                                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Consumer</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="success">
+				                  <td>1</td>
+				                  <td>Mabu Manaileng</td>
+				                  <td>50L</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>2</td>
+				                  <td>Ofentswe Lebogo</td>
+				                  <td>65L</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>3</td>
+				                  <td>Asive Ndlaba</td>
+                                                  <td>100L</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+                                        
+                                        <!-- BY MUNI-->
+                                        <div class="panel-body animated" id="byMunicipality" hidden>
+                                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Municipality</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="success">
+				                  <td>1</td>
+				                  <td>Ekurhuleni</td>
+				                  <td>5000L</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>2</td>
+				                  <td>Tshwane</td>
+				                  <td>12 000L</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+                                        
+                                        <!-- BY SCHOOL-->
+                                        <div class="panel-body animated" id="bySchool" hidden>
+                                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>School Name</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="success">
+				                  <td>1</td>
+				                  <td>Ekurhuleni City High</td>
+				                  <td>800L</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>2</td>
+				                  <td>Ekurhuleni Girls High</td>
+				                  <td>1300L</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  			</div>
+  				</div>
+                                
+  				<div class="col-md-6">
+                                    <div class="content-box-large">
+                                        <div class="panel-heading">
+                                            <div class="panel-title text-center">WORST Waterly Citizens by Category</div>
+                                            <div class="panel-options">
+                                                <div class="btn-group" style="margin: 0px 10px 10px 0px;"> 
+                                                    <button type="button" onclick="WbyConsumer()" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                                      by Consumer <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                                                      <li><a onclick="WbyConsumer()">by Consumer</a></li>
+                                                      <li><a href="">by Complex</a></li>
+                                                      <li><a href="#">by School</a></li>
+                                                      <li><a onclick="WbyCompany()">by Company</a></li>
+                                                      <li><a>by Municipality</a></li>
+                                                      <li><a href="#">by Province</a></li>
+                                                    </ul>
+                                                </div>
+						<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body animated zoomInDown" id="WbyConsumer">
+                                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Consumer</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="danger">
+				                  <td>1</td>
+				                  <td>Dave Mabaso</td>
+				                  <td>4000L</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>2</td>
+				                  <td>Mbangiso Mabaso</td>
+				                  <td>3000L</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+                                        
+                                        <!-- BY COMPANY -->
+                                        <div class="panel-body animated zoomInDown" id="WbyCompany" hidden>
+                                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Company Name</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="danger">
+				                  <td>1</td>
+				                  <td>Huawei</td>
+				                  <td>8000L</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>2</td>
+				                  <td>Telkom</td>
+				                  <td>7000L</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  			</div>
+  				</div>
+  			</div>                            
+		  	</div>                      
+		</div>
+    </div>
+    </div>
+
+    <footer>
+         <div class="container">
+         
+            <div class="copy text-center">
+               Cognitive Squad. Copyright 2016
+            </div>
+            
+         </div>
+      </footer>
+
+     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../js/jquery/jquery.js"></script>
+    
+    <script src="../js/jquery/jquery-2.2.3.min"></script>
+    
+    <!-- jQuery UI -->
+    <script src="../js/jquery/jquery-ui.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    
+    <link href="../vendors/datatables/dataTables.bootstrap.css" rel="stylesheet" media="screen">
+
+    <script src="../vendors/datatables/js/jquery.dataTables.min.js"></script>
+
+    <script src="../vendors/datatables/dataTables.bootstrap.js"></script>
+    
+    <script src="../js/tables.js"></script>
+
+    <script src="../js/stats.js"></script>
+  </body>
+</html>
