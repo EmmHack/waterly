@@ -1,0 +1,277 @@
+{% extends 'adminapp/base.html' %}
+{% block title %}
+	<title> Waterly | Dashboard</title>
+{% endblock %}
+
+{% block body %}
+  <body>
+  	<div class="header">
+	     <div class="container">
+	        <div class="row">
+	           <div class="col-md-5">
+	              <!-- Logo -->
+	              <div class="logo">
+	                 <h1><a href="index.html">Waterly</a></h1>
+	              </div>
+	           </div>
+	           <div class="col-md-5">
+	              <div class="row">
+	                <div class="col-lg-12">
+	                  <div class="input-group form">
+	                       <input type="text" class="form-control" placeholder="Search...">
+	                       <span class="input-group-btn">
+	                         <button class="btn btn-primary" type="button">Search</button>
+	                       </span>
+	                  </div>
+	                </div>
+	              </div>
+	           </div>
+	           <div class="col-md-2">
+	              <div class="navbar navbar-inverse" role="banner">
+	                  <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+	                    <ul class="nav navbar-nav">
+	                      <li class="dropdown">
+	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+	                        <ul class="dropdown-menu animated zoomIn">
+	                          <li><a href="profile.html">Profile</a></li>
+	                          <li><a href="login.html">Logout</a></li>
+	                        </ul>
+	                      </li>
+	                    </ul>
+	                  </nav>
+	              </div>
+	           </div>
+	        </div>
+	     </div>
+	</div>
+
+    <div class="page-content">
+    	<div class="row">
+		  <div class="col-md-2 animated bounceIn">
+		  	<div class="sidebar content-box" style="display: block;">
+                <ul class="nav">
+                    <!-- Main menu -->
+                    <li><a href="../adminapp/"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+                    <li><a href="../reports/"><i class="glyphicon glyphicon-calendar"></i> Reports </a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-list"></i> Predictions</a></li>
+                    <li class="current"><a href="#"><i class="glyphicon glyphicon-stats"></i> Maintenance</a></li>
+                </ul>
+             </div>
+		  </div>
+		  <div class="col-md-10">
+		  	<div class="row" id="adminLandingPage">
+                            
+              <div class="row animated fadeInDown">
+  				<div class="col-md-12">
+                    <div class="content-box-large">
+                        <div class="panel-heading">
+                            <div class="panel-title text-center"><strong>Daily Champions</strong> - Waterly Citizens of the Day</div>
+                            <div class="panel-options">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                      Per User <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                                      <li><a href="#">by Complex</a></li>
+                                      <li><a href="#">by School</a></li>
+                                      <li><a href="#">by Company</a></li>
+                                      <li><a href="#">by Municipality</a></li>
+                                      <li><a href="#">by Province</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body" id="byUser">
+                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Name</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+				                <tr class="success">
+				                  <td>1</td>
+				                  <td>Mark Otto</td>
+				                  <td>@mdo</td>
+				                </tr>
+				                <tr class="success">
+				                  <td>2</td>
+				                  <td>Jacob</td>
+				                  <td>@fat</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>3</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>4</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>5</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				              </tbody>
+				            </table>
+	  					</div>
+		  			</div>
+  				</div>
+  			</div>
+                            
+            <div class="content-box-large animated zoomInDown">
+  				<div class="panel-heading ">
+                    <div class="panel-title"><strong>You versus the Champions</strong></div>
+					
+					<div class="panel-options">
+						<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+					</div>
+				</div>
+  				<div class="panel-body animated bounceInUp">
+  					<div id="hero-area" style="height: 230px;"></div>
+  				</div>
+  			</div>
+                            
+		</div>
+                      
+                      
+		<div class="col-md-12 animated bounceInUp" id="myInsights">
+
+  			<div class="row">
+                <div class="col-md-6">
+                    <div class="content-box-large">
+                        <div class="panel-heading">
+                            <div class="panel-title">Bar Chart</div>
+                            <div class="panel-options">
+                                <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body animated fadeInUpBig">
+                            <div id="catchart" style="width:100%;height:300px"></div>                                            
+                        </div>                                        
+                    </div>
+				</div>
+                            
+  				<div class="col-md-6 animated zoomIn">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">Your consumption versus how much you pay</div>
+							
+							<div class="panel-options">
+								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+							</div>
+						</div>
+		  				<div class="panel-body">
+		  					<div id="timechart" style="width:100%;height:300px"></div>
+		  				</div>
+		  			</div>
+  				</div>
+  			</div>                      
+		</div>
+
+		<div class="row" id="leaderBoardPage">
+                <div class="row animated fadeInDown">
+  					<div class="col-md-6">
+                        <div class="content-box-large">
+                            <div class="panel-heading">
+                                <div class="panel-title text-center">
+                                    Our Top Waterly Citizens <br />
+                                    Click to discover how they do it...
+                                </div>
+                                <div class="panel-options">
+                                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                            <table class="table">
+				              <thead>
+				                <tr>
+				                  <th>Ranking</th>
+				                  <th>Name</th>
+				                  <th>Consumption</th>
+				                </tr>
+				              </thead>
+				              <tbody>
+                                <tr class="success" onclick="showLeader()">
+				                  <td>1</td>
+				                  <td>Mark Otto</td>
+				                  <td>@mdo</td>
+				                </tr>
+				                <tr class="success">
+				                  <td>2</td>
+				                  <td>Jacob</td>
+				                  <td>@fat</td>
+				                </tr>
+				                <tr class="success">
+				                  <td>3</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>4</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>5</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>6</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="warning">
+				                  <td>7</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>8</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>9</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				                <tr class="danger">
+				                  <td>10</td>
+				                  <td>Larry</td>
+				                  <td>@twitter</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  			</div>
+  				</div>
+  				<div class="col-md-6 animated bounceIn" id="leader">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+                            <div class="panel-title text-center">Mark Otto</div>
+							
+							<div class="panel-options">
+								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+							</div>
+						</div>
+		  				<div class="panel-body">
+		  					<div id="catchart" style="width:100%;height:300px"></div>
+		  				</div>
+		  			</div>
+  				</div>
+  			</div>
+                            
+		  	</div>
+		</div>
+    </div>
+</div>
+
+{% include 'adminapp/footer.html' %}
+</body>
+{% endblock %}
