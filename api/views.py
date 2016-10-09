@@ -131,11 +131,11 @@ class CreateConsumption(generics.CreateAPIView):
 
         return Response(serializer.data)
 
-    def get_queryset(self, reading, consumer, date):
+    def get_queryset(self, reading, meter_no, date):
         """Construct queryset based on consumer and date.
         
         Args:
-            consumer (str): Consumer meter no.
+            meter_no (str): Consumer meter no.
             date (str): Date of consumption.
 
         Returns:
