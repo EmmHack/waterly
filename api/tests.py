@@ -69,10 +69,13 @@ class APITests(APITestCase):
         url = reverse('create_consumption_reading')
 
         reading = 50.9
-        date = '2016-09-30'
+        date = '2016-09-30T00:00:00Z'
 
         data = {'reading': reading, 'consumer': meter_no, 'date': date}
         response = self.client.post(url, data)
+
+        print response
+
         results = json.loads(response.content)
         
         self.assertEqual(results['reading'], reading)
@@ -84,7 +87,7 @@ class APITests(APITestCase):
         response = self.client.get(url)
         
         munic_name = 'Ekurhuleni'
-        date = '2016-10-01'
+        date = '2016-10-01T00:00:00Z'
         url = reverse('avg_munic_consumption',
                       kwargs={'munic_name': munic_name, 'date': date})
         response = self.client.get(url)

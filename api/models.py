@@ -23,10 +23,10 @@ class Address(models.Model):
 class Consumption(models.Model):
     reading = models.FloatField()
     consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateTimeField()
 
 
 class AvgMunicConsumption(models.Model):
     munic_name = models.CharField(max_length=30, primary_key=True)
-    date = models.DateField()
+    date = models.DateTimeField()
     avg_reading = models.FloatField()
