@@ -34,24 +34,25 @@ $(function() {
         var start_date = new Date(2016, 09, 07, 00, 00, 00);
         var end_date = new Date();
         while (start_date < end_date) {
-            $.each(consumers, function (index, consumer) {
-                for (var hour = 0; hour < 24; hour++) {
+            for (var hour = 0; hour < 24; hour++) {
+                var date = prependZero(start_date.getFullYear()) + "-" +
+                           prependZero(start_date.getMonth() + 1) + "-" +
+                           prependZero(start_date.getDate()) + "T" +
+                           prependZero(start_date.getHours()) + ":" +
+                           prependZero(start_date.getMinutes()) + ":" +
+                           prependZero(start_date.getSeconds()) + "Z";
+
+                $.each(consumers, function (index, consumer) {
                     var reading = Math.random() * (400 - 150) + 150;
                     var meter_no = consumer.meter_no; 
-                    var date = prependZero(start_date.getFullYear()) + "-" +
-                               prependZero(start_date.getMonth() + 1) + "-" +
-                               prependZero(start_date.getDate()) + "T" +
-                               prependZero(start_date.getHours()) + ":" +
-                               prependZero(start_date.getMinutes()) + ":" +
-                               prependZero(start_date.getSeconds()) + "Z";
                     var data = {'reading': reading, 'consumer': meter_no,
                                 'date': date};
+                    
                     createConsumption(data);
-                }
-            });
-
-            var nextHours = start_date.getHours() + 1;
-            start_date = new Date(start_date.setHours(nextHours));
+                });
+                var nextHours = start_date.getHours() + 1;
+                start_date = new Date(start_date.setHours(nextHours));
+            }
         }
     }
 
