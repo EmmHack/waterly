@@ -1,21 +1,9 @@
 
-{% extends "app/base.html" %}
-
+{% extends "adminapp/base_reg_log.html" %}
+{% block title%}
 <title>Waterly | SignUp</title>
+{% endblock %}
 {% block content %}
-  <body class="login-bg">
-    <div class="header">
-         <div class="container">
-            <div class="row" style="margin-left: 44%;">
-               <div class="col-md-12">
-                  <!-- Logo -->
-                  <div class="logo">
-                     <h1><a href="index.html">Waterly</a></h1>
-                  </div>
-               </div>
-            </div>
-         </div>
-    </div>
 
     <div class="page-content container">
         <div class="row">
@@ -28,9 +16,7 @@
                             <form id="passwordForm">
                                 <input class="form-control text-center" type="password" placeholder="Password">
                                 <input class="form-control text-center" type="password" placeholder="Confirm Password">
-                                <div class="action">
-                                    <button class="btn btn-primary btn-lg" type="submit">Confirm</button>
-                                </div>                
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm</button>                
                             </form>
                             <!-- <form name="register" action="accounts/signup/" method="post">
                                 {% csrf_token %}
@@ -57,9 +43,7 @@
                             <form id="passwordForm">
                                 <input class="form-control text-center" type="password" placeholder="Password">
                                 <input class="form-control text-center" type="password" placeholder="Confirm Password">
-                                <div class="action">
-                                    <button class="btn btn-primary btn-lg" type="submit">Confirm</button>
-                                </div>                
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm</button>               
                             </form>
 
                         </div>
@@ -74,9 +58,7 @@
                             <form id="passwordForm">
                                 <input class="form-control text-center" type="password" placeholder="Password">
                                 <input class="form-control text-center" type="password" placeholder="Confirm Password">
-                                <div class="action">
-                                    <button class="btn btn-primary btn-lg" type="submit">Confirm</button>
-                                </div>                
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm</button>               
                             </form>
                         </div>
                     </div>
@@ -85,5 +67,5 @@
 
         </div>
     </div>
-{%  endblock content %}
+{% endblock %}
  

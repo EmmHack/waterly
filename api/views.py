@@ -1,13 +1,6 @@
-import datetime
-
-from django.shortcuts import render
-from rest_framework.test import APIClient
 from rest_framework import generics
 from rest_framework.response import Response
-from django.db.models import Q
 from django.db.models.query import QuerySet
-from django.http import QueryDict
-from rest_framework import status
 
 from api.models import Consumer, Address, Consumption
 from api.serialisers import ConsumerSerialiser, ConsumptionSerialiser, \
