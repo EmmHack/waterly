@@ -44,8 +44,7 @@ $(function() {
                                prependZero(start_date.getDay()) + "T" +
                                prependZero(start_date.getHours()) + ":" +
                                prependZero(start_date.getMinutes()) + ":" +
-                               prependZero(start_date.getSeconds()) + "+" +
-                               "00:00";
+                               prependZero(start_date.getSeconds()) + "Z";
                     var data = {'reading': reading, 'consumer': meter_no,
                                 'date': date};
                     createConsumption(data);
