@@ -11,11 +11,7 @@ from app.models import Post
 from forms import *
 from django.contrib.auth.models import User
 from django.views import View
-<<<<<<< HEAD
-=======
 from rest_framework.test import APIClient
-
->>>>>>> origin/hotfix
 from api.models import Consumer, Address, Consumption
 
 
@@ -116,7 +112,7 @@ class GeneratePlotData(View):
 
     def get(self, request, *args, **kwargs):
 
-        start_date = datetime(year=2016, month=9, day=7, hour=0, minute=0, 
+        start_date = datetime(year=2016, month=9, day=1, hour=0, minute=0,
                               second=0)
         end_date = datetime.now()
         consumers = Consumer.objects.all()
