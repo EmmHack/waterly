@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Waterly | Login</title>
     {% load staticfiles %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="{% static 'app/images/waterly.png' %}"/>
     <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/styles.css' %}" rel="stylesheet">
     <link href="{% static 'app/css/animate.css' %}" rel="stylesheet">
+    {% block title %}
+    {% endblock %}
   </head>
   <body class="login-bg">
     <div class="header">
@@ -24,7 +25,7 @@
   </div>
   {% block content %}
   {% endblock %}
-  
+
   {% include "adminapp/footer.html" %}
     <script src="{% static 'app/js/jquery/jquery.js' %}"></script>
     <script src="{% static 'app/js/bootstrap.min.js' %}"></script>

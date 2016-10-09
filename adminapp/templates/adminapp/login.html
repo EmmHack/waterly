@@ -1,4 +1,9 @@
 {% extends "adminapp/base_reg_log.html" %}
+
+{% block title %}
+<title>Waterly | Login</title>
+{% endblock %}
+
 {% block content %}
 <div class="page-content container">
     <div class="row">
@@ -10,13 +15,12 @@
                       <form id="loginForm">
                         <input class="form-control text-center" type="text" placeholder="Emloyee Number">
                         <input class="form-control text-center" type="password" placeholder="Password">
-                        <div class="action">
-                          <button class="btn btn-primary btn-lg" type="submit">Login</button>
-                        </div>      
+                        
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                             
                       </form>
                   </div>
               </div>
-
               <div class="already">
                   <p>Don't have an account yet?</p>
                   <a href="signup.html">Sign Up</a>
