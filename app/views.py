@@ -74,7 +74,7 @@ class GenerateRandomData(View):
 class UploadFixture(View):
     def get(self, request, *args, **kwargs):
 
-        with open('datafiles/consumers.csv', 'rb') as consumers:
+        with open('datafiles/consumers10.csv', 'rb') as consumers:
             reader = csv.reader(consumers, delimiter=',', quotechar='|')
             next(reader, None)
             for row in reader:
@@ -82,7 +82,7 @@ class UploadFixture(View):
                 meter_no = row[1]
                 Consumer.objects.create(name=name, meter_no=meter_no)
 
-        with open('datafiles/addresses.csv', 'rb') as addresses:
+        with open('datafiles/addresses10.csv', 'rb') as addresses:
             reader = csv.reader(addresses, delimiter=',', quotechar='|')
             next(reader, None)
             for row in reader:
