@@ -11,7 +11,7 @@ url = 'api/read_consumption_readings/';
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d-%b-%y").parse;
+var parseDate = d3.time.format("%Y-%m-%d").parse;
 
 var x = d3.time.scale()
     .range([0, width]);
@@ -47,7 +47,7 @@ var svg = d3.select('#interactive').append("svg")
   });
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
-  y.domain([0, d3.max(data, function(d) { return d.reading; })]);
+  y.domain([0, d3.max(data, function(d) { return +d.reading; })]);
 
   svg.append("path")
       .datum(data)
