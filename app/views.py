@@ -2,6 +2,7 @@ import random, csv
 
 from datetime import datetime, timedelta
 
+from django.shortcuts import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -10,6 +11,11 @@ from app.models import Post
 from forms import *
 from django.contrib.auth.models import User
 from django.views import View
+<<<<<<< HEAD
+=======
+from rest_framework.test import APIClient
+
+>>>>>>> origin/hotfix
 from api.models import Consumer, Address, Consumption
 
 
@@ -105,3 +111,33 @@ class UploadFixture(View):
 
         response = {'result': 'data uploaded successfully'}
         return JsonResponse(response)
+
+class GeneratePlotData(View):
+
+    def get(self, request, *args, **kwargs):
+
+        start_date = datetime(year=2016, month=9, day=7, hour=0, minute=0, 
+                              second=0)
+        end_date = datetime.now()
+        consumers = Consumer.objects.all()
+        url = reverse('create_consumption_reading')
+        client = APIClient()
+
+        while start_date < end_date:
+            for  hour in range(24):
+                date = str(start_date).replace(' ', 'T') + 'Z'
+
+                for consumer in consumers:
+                    reading = self.get_random()
+                    meter_no = consumer.meter_no 
+                    data = {'reading': reading, 'consumer': meter_no,
+                            'date': date}
+                    client.post(url, data)
+
+                start_date += timedelta(hours=1)
+
+        return JsonResponse({'result': 'success'})
+
+   
+    def get_random(self):
+        return random.randrange(150, 400)

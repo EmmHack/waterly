@@ -202,6 +202,39 @@ class ListCreateConsumerAddress(generics.ListCreateAPIView):
     serializer_class = AddressSerialiser
 
 
+class ListConsumptionReading(generics.ListCreateAPIView):
+    """Get consumption reading for single Consumer.
+
+    """
+
+    def get(self, *args, **kwargs):
+        """Given meter number get consumptions reading.
+
+        Kwargs:
+            kwargs['meter_no'] (str): Meter number for the consumer.
+
+        """
+
+        meter_no = int(kwargs['meter_no'])
+        queryset = self.get_queryset(meter_no)
+        serializer = ConsumptionSerialiser(queryset, many=True)
+
+        return Response(serializer.data)
+
+    def get_queryset(self, meter_no):
+        """Construct queryset based on the given consumer.
+
+        Args:
+            meter_no (str): Meter number.
+
+        Returns:
+           model: The address of a give consumer.
+
+        """
+        consumer = Consumer.objects.filter(meter_no=meter_no)
+        queryset = Consumption.objects.filter(consumer=consumer)
+        return queryset
+
 class GetConsumerAddress(generics.ListCreateAPIView):
     """Get consumer address given the meter number.
     

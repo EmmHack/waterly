@@ -74,8 +74,6 @@ class APITests(APITestCase):
         data = {'reading': reading, 'consumer': meter_no, 'date': date}
         response = self.client.post(url, data)
 
-        print response
-
         results = json.loads(response.content)
         
         self.assertEqual(results['reading'], reading)
