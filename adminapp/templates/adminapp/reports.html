@@ -1,14 +1,26 @@
 {% extends 'adminapp/layout.html' %}
 {% block title %}
-  <title> Waterly | Reports</title>
+<title> Waterly | Reports</title>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-10">
+<div class="col-md-7">
   <div class="content-box-large animated zoomInDown">
       <div class="panel-heading">
           <div class="panel-title">CURRENT DEMAND</div>
           <div class="panel-options">
+              <div class="btn-group" style="margin: 0px 10px 10px 0px;">
+                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                    by Consumer <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu animated zoomIn" role="menu">
+                    <li><a href="#">by Complex</a></li>
+                    <li><a href="#">by School</a></li>
+                    <li><a href="#">by Company</a></li>
+                    <li><a href="#">by Municipality</a></li>
+                    <li><a href="#">by Province</a></li>
+                  </ul>
+              </div>
               <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
           </div>
       </div>
