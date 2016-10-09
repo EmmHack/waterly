@@ -1,9 +1,13 @@
+import datetime
+
 from django.shortcuts import render
 from rest_framework.test import APIClient
 from rest_framework import generics
 from rest_framework.response import Response
 from django.db.models import Q
 from django.db.models.query import QuerySet
+from django.http import QueryDict
+from rest_framework import status
 
 from api.models import Consumer, Address, Consumption
 from api.serialisers import ConsumerSerialiser, ConsumptionSerialiser, \
@@ -27,7 +31,7 @@ class CreateConsumptionReadings(generics.CreateAPIView):
 
         meter_no = kwargs['meter_no']
         queryset = self.get_queryset(meter_no)
-        serializer = ConsumptionSerialiser(queryset, many=True)
+        serializer = ConsumptionSerialiser(queryset, many=False)
 
         return Response(serializer.data)
 
@@ -48,7 +52,7 @@ class CreateConsumptionReadings(generics.CreateAPIView):
         return queryset
 
 
-class ListAvgMunicConsumption(generics.ListAPIView):
+class CreateAvgMunicConsumption(generics.CreateAPIView):
     
     serializer_class = AvgMunicConsumptionSerialiser
 
@@ -82,7 +86,7 @@ class ListAvgMunicConsumption(generics.ListAPIView):
 
         """
         addresses = Address.objects.filter(municipality_name=munic_name)
-        consumptions = Consumption.objects.filter(date = date)
+        consumptions = Consumption.objects.filter(date=date)
         
         sum_readings = 0.0
         count = 0
@@ -93,7 +97,10 @@ class ListAvgMunicConsumption(generics.ListAPIView):
                     sum_readings = sum_readings + consumption.reading
                     count += 1
 
-        average = sum_readings / count
+        average = 0
+        if count is not 0:
+            average = sum_readings / count
+
         queryset = AvgMunicConsumption.objects.create(munic_name=munic_name, 
                                                       date=date,
                                                       avg_reading=average)
@@ -101,7 +108,50 @@ class ListAvgMunicConsumption(generics.ListAPIView):
         return queryset
 
 
-class Hope(generics.ListAPIView):
+class CreateConsumption(generics.CreateAPIView):
+    
+    serializer_class = ConsumptionSerialiser
+
+    def get(self, *args, **kwargs):
+        """Given consumer, consumption and date creater consumption
+        record in the database.
+        
+        Kwargs:
+            kwargs['reading'] (float): consumption reading for consumer.
+            kwargs['date'] (str): Date of consumption.
+            kwargs['consumer'] (str): Consumer meter no.
+
+        """
+
+        reading = kwargs['reading']
+        date = kwargs['date']
+        consumer = kwargs['consumer']
+        queryset = self.get_queryset(consumer, date)
+        serializer = ConsumptionSerialiser(queryset, many=False)
+
+        return Response(serializer.data)
+
+    def get_queryset(self, reading, consumer, date):
+        """Construct queryset based on consumer and date.
+        
+        Args:
+            consumer (str): Consumer meter no.
+            date (str): Date of consumption.
+
+        Returns:
+           model: Random consumption of the consumer for a given day.
+
+        """
+
+        consumer = Consumer.objects.filter(meter_no=meter_no)
+
+        queryset = Consumption.objects.create(consumer=consumer, date=date,
+                                              reading=reading)
+
+        return queryset
+
+
+class ListAvgMunicConsumption(generics.ListAPIView):
     """Get consumer entries from the api.
     
     Attributes:

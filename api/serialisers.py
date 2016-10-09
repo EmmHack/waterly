@@ -10,7 +10,6 @@ class ConsumerSerialiser(serializers.ModelSerializer):
 class ConsumptionSerialiser(serializers.ModelSerializer):
     class Meta:
         model = Consumption
-        fields = ['reading', 'consumer', 'date']
 
 
 class AddressSerialiser(serializers.ModelSerializer):

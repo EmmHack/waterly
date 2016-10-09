@@ -78,8 +78,6 @@ class GenerateRandomData(View):
         last_date = Consumption.objects.filter().order_by('-id')[0].date
         new_date = datetime.strptime(str(last_date), '%Y-%m-%d') + timedelta(days=1)
 
-        print new_date
-
         consumers = Consumer.objects.all()
 
         for consumer in consumers:
@@ -124,18 +122,5 @@ class UploadFixture(View):
                                        municipality_name=municipality_name,
                                        province_name=province_name)
 
-        with open('datafiles/consumption.csv', 'rb') as consumption:
-            reader = csv.reader(consumption, delimiter=',', quotechar='|')
-            next(reader, None) 
-            for row in reader:
-                meter_no = row[0]
-                reading = row[1]
-                date = row[2].replace('/', '-')
-
-                consumer = Consumer.objects.filter(meter_no=meter_no)[0]
-                Consumption.objects.create(consumer=consumer, reading=reading,
-                                           date=date)
-
         response =  {'result': 'data uploaded successfully'}
         return JsonResponse(response)
-
