@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Waterly | Login</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/waterly.png' %}"/>
+    <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/styles.css' %}" rel="stylesheet">
+    <link href="{% static 'app/css/animate.css' %}" rel="stylesheet">
+  </head>
+  <body class="login-bg">
+    <div class="header">
+       <div class="container">
+          <div class="row" style="margin-left: 44%;padding-top:6px; padding-bottom:6px">
+             <div class="col-md-12">
+                <!-- Logo -->
+                <div class="logo">
+                   <h1><a href="../adminapp/">Waterly</a></h1>
+                </div>
+             </div>
+          </div>
+       </div>
+  </div>
+  {% block content %}
+  {% endblock %}
+  
+  {% include "adminapp/footer.html" %}
+    <script src="{% static 'app/js/jquery/jquery.js' %}"></script>
+    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/js/custom.js' %}"></script>
+  </body>
+</html>
