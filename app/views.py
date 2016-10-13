@@ -112,14 +112,23 @@ class GeneratePlotData(View):
 
     def get(self, request, *args, **kwargs):
 
-        start_date = datetime(year=2016, month=9, day=1, hour=0, minute=0,
+        start_date = datetime(year=2016, month=1, day=1, hour=0, minute=0,
                               second=0)
         end_date = datetime.now()
+
+        if Consumption.objects.count() != 0:
+            start_date = Consumption.objects.latest('date').date
+            start_date = start_date.replace(tzinfo=None)
+
+        diff = end_date - start_date 
+        diff_hours = divmod(diff.days * 86400 + diff.seconds, 60)[0] / 60
+
         consumers = Consumer.objects.all()
         url = reverse('create_consumption_reading')
+
         client = APIClient()
 
-        while start_date < end_date:
+        while diff_hours >= 1:
             for  hour in range(24):
                 date = str(start_date).replace(' ', 'T') + 'Z'
 
@@ -130,10 +139,18 @@ class GeneratePlotData(View):
                             'date': date}
                     client.post(url, data)
 
-                start_date += timedelta(hours=1)
+                end_date = datetime.now()
+                diff = end_date - start_date 
+                diff_hours = divmod(diff.days * 86400 + diff.seconds, 60)[0] / 60
+
+                if diff_hours >= 1:
+                    start_date += timedelta(hours=1)
+                else:
+                    break;
+            print start_date
 
         return JsonResponse({'result': 'success'})
 
    
     def get_random(self):
-        return random.randrange(150, 400)
+        return random.uniform(150.0, 400.0)

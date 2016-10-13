@@ -1,5 +1,4 @@
 $(function() {  
-
     var consumers = null;
     
     url = 'api/consumers/'
@@ -12,6 +11,14 @@ $(function() {
         }
     });
 
+    // Get latest data
+    url = 'app/generate_plot_data';
+    $.ajax({
+        type : 'GET',
+        url  : url,
+        data : data,
+        async: false,
+    });
 
     var consumptions = null;
     
@@ -25,62 +32,15 @@ $(function() {
         }
     });
 
-
-    if (consumptions.length == 0) {
-        generateSimulationData();
-    }
-
-    function generateSimulationData() {
-        var start_date = new Date(2016, 09, 07, 00, 00, 00);
-        var end_date = new Date();
-        while (start_date < end_date) {
-
-            for (var hour = 0; hour < 24; hour++) {
-                var date = prependZero(start_date.getFullYear()) + "-" +
-                           prependZero(start_date.getMonth() + 1) + "-" +
-                           prependZero(start_date.getDate()) + "T" +
-                           prependZero(start_date.getHours()) + ":" +
-                           prependZero(start_date.getMinutes()) + ":" +
-                           prependZero(start_date.getSeconds()) + "Z";
-
-                $.each(consumers, function (index, consumer) {
-                    var reading = Math.random() * (400 - 150) + 150;
-                    var meter_no = consumer.meter_no; 
-                    var data = {'reading': reading, 'consumer': meter_no,
-                                'date': date};
-                    
-                    createConsumption(data);
-                });
-                var nextHours = start_date.getHours() + 1;
-                start_date = new Date(start_date.setHours(nextHours));
-            }
-        }
-    }
-
-    function createConsumption(data) {
-        url = 'api/create_consumption_reading/';
-        $.ajax({
-            type : 'POST',
-            url  : url,
-            data : data,
-            async: false,
-        });
-    }
-
-
     function prependZero(value) {
        return value < 10? "0" + value: value;
     }
-
 
     url = 'api/list_avg_consumption/';
     $.ajax({
         type : 'GET',
         url  : url,
         async: false,
-        success :  function(data){
-            console.log(data);
-        }
     });
 
     var data = []
@@ -90,7 +50,6 @@ $(function() {
          d['meter_no'] = consumptions[i]['consumer']
          data.push(d);
     }
-
     
     for (var i = 0; i < consumers.length; i++) {
         for (var j = 0; j < data.length; j++) {
@@ -117,10 +76,8 @@ $(function() {
     
     }
 
-
     $('#dataTables_empty').remove();
 
-  
     for (var i = 0; i < data.length; i++) {
         if(i < 2){
             $("#tbl_champs").append("<tr class='success' ><td>" + (i+1) +
@@ -140,7 +97,6 @@ $(function() {
                                     "</td></tr>");
         }
     }
-
 
     for (var i = 0; i < data.length; i++) {
         if(i < 2){
@@ -181,5 +137,4 @@ $(function() {
                                       "</td></tr>");
         }
     }
-
 });
