@@ -86,6 +86,8 @@ function plot_data(data, type,id_division){
           height = 500 - margin.top - margin.bottom;
 
       //console.log(svg_null);
+      var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
       var x = d3.scaleTime().range([0, width]);
       var y = d3.scaleLinear().range([height, 0]);
       var bisectDate = d3.bisector(function(d) { return d.date; }).left;
@@ -138,8 +140,12 @@ function plot_data(data, type,id_division){
             .data(data)
           .enter().append("circle")
             .attr("r", 5)
-            .on("mouseover", function() { focus.style("display", null); })
-            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mouseover", function(d) { 
+              tooltip.style("left", d3.event.pageX - 50 + "px")
+                .style("top", d3.event.pageY - 70 + "px")
+                .style("display", "inline-block")
+                .html("<hr/>"+(d.date) + "<br>" + (d.reading));})
+            .on("mouseout", function(d) { tooltip.style("display", "none");})
             .on("mousemove", mousemove)
             .on("click",function(d){
                 console.log("#TO DO");
@@ -162,13 +168,6 @@ function plot_data(data, type,id_division){
         var focus = svg.append("g")
         .attr("class", "focus")
         .style("display", "none");
-
-        focus.append("circle")
-            .attr("r", 4.5);
-
-        focus.append("text")
-            .attr("x", 9)
-            .attr("dy", ".35em");
 
         
           }
