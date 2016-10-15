@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import *
 
 
-# Create your models here.
 class Post(models.Model):
     username = models.CharField(max_length=140)
     text = models.CharField(max_length=140)

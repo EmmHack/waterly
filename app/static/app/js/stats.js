@@ -12,13 +12,17 @@ $(function() {
     });
 
     // Get latest data
-    url = 'app/generate_plot_data';
-    $.ajax({
-        type : 'GET',
-        url  : url,
-        data : data,
-        async: false,
-    });
+    setInterval(gen_latest_data, 3600000)
+    gen_latest_data();
+    
+    function gen_latest_data() {
+        url = 'app/generate_plot_data';
+        $.ajax({
+            type : 'GET',
+            url  : url,
+            async: false,
+        });
+    }
 
     var consumptions = null;
     

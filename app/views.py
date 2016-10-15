@@ -1,5 +1,6 @@
 import random, csv
-
+import numpy as np, numpy.random
+from pyswarm import pso
 from datetime import datetime, timedelta
 
 from django.shortcuts import reverse
@@ -12,8 +13,7 @@ from forms import *
 from django.contrib.auth.models import User
 from django.views import View
 from rest_framework.test import APIClient
-from api.models import Consumer, Address, Consumption
-
+from api.models import Consumer, Address, Consumption, ConsumerDynamicData
 
 class Home(View):
     template_name = 'app/index.html'
@@ -108,6 +108,7 @@ class UploadFixture(View):
         response = {'result': 'data uploaded successfully'}
         return JsonResponse(response)
 
+
 class GeneratePlotData(View):
 
     def get(self, request, *args, **kwargs):
@@ -133,7 +134,7 @@ class GeneratePlotData(View):
                 date = str(start_date).replace(' ', 'T') + 'Z'
 
                 for consumer in consumers:
-                    reading = self.get_random()
+                    reading = self.get_random(consumer)
                     meter_no = consumer.meter_no 
                     data = {'reading': reading, 'consumer': meter_no,
                             'date': date}
@@ -152,5 +153,50 @@ class GeneratePlotData(View):
         return JsonResponse({'result': 'success'})
 
    
-    def get_random(self):
-        return random.uniform(150.0, 400.0)
+    def get_random(self, consumer):
+        lb = [0] * 250
+        ub = [1] * 250
+        
+        data_model = ConsumerDynamicData.objects.filter(consumer=consumer)
+
+        if (len(data_model) == 0):
+            rand = random.uniform(150.0, 400.0) 
+            data_model = ConsumerDynamicData.objects.create(
+                            consumer=consumer,
+                            average=rand,
+                            optimal_point=rand,
+                         )
+        else:
+            data_model = data_model[0]
+        
+        average = data_model.average
+        optimal_point = data_model.optimal_point
+        
+        xopt, fopt = pso(self.evaluate, lb, ub,
+                         args=[data_model.optimal_point])
+        consumption = xopt.argmax() + 150
+        diff = data_model.optimal_point - consumption
+
+        if data_model.n % 24 == 0:
+            data_model.optimal_point =  data_model.optimal_point - \
+                                        data_model.average_diff * 2
+
+        data_model.n = data_model.n + 1
+        data_model.average_diff = (data_model.average_diff * \
+                                    (data_model.n - 1) + diff) / data_model.n
+        
+        data_model.average = (data_model.average * (data_model.n - 1) + 
+                              consumption) / data_model.n
+        data_model.average_fopt = (data_model.average_fopt * \
+                                    (data_model.n - 1) + fopt) / data_model.n
+        data_model.save()
+
+        return consumption
+
+    def evaluate(self, probabilities, optimal_point):
+        sum = probabilities.sum()
+        probabilities =  probabilities / sum    # normalise to have sum 1
+        consumption = probabilities.argmax() + 150
+        result = abs(consumption - optimal_point)
+        
+        return result
