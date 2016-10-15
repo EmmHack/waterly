@@ -144,7 +144,7 @@ function plot_data(data, type,id_division){
               tooltip.style("left", d3.event.pageX - 50 + "px")
                 .style("top", d3.event.pageY - 70 + "px")
                 .style("display", "inline-block")
-                .html("<hr/>"+(d.date) + "<br>" + (d.reading));})
+                .html("Details <hr/>"+(d.date) + "<br>" + (d.reading));})
             .on("mouseout", function(d) { tooltip.style("display", "none");})
             .on("mousemove", mousemove)
             .on("click",function(d){
