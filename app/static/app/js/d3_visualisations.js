@@ -116,6 +116,7 @@ function retrieve_data(level){
     var parseDateTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
     var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S-%H:%M");
 
+
 if (years_data.length >= 3){
 
     plot_data(hours_data, 0,'#interactive');

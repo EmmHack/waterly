@@ -10,6 +10,19 @@ class Consumer(models.Model):
     modified_at = models.DateTimeField(auto_now=True)
 
 
+class ConsumerDynamicData(models.Model):
+    consumer = models.OneToOneField(
+        Consumer,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
+    average = models.FloatField()
+    optimal_point = models.FloatField()
+    average_fopt = models.FloatField(default=0.0)
+    average_diff = models.FloatField(default=0.0)
+    n = models.IntegerField(default=1)
+
+
 class Address(models.Model):
     building_name = models.CharField(max_length=30)
     street_name = models.CharField(max_length=50)
