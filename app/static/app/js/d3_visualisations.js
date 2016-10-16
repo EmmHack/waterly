@@ -22,7 +22,7 @@ $(function() {
             consumers = data;
         }
     });
-
+    //console.log(consumers);
     // Get latest data
     var hour = 3600000;
     setInterval(gen_latest_data, hour);
@@ -215,12 +215,10 @@ $(function() {
     *   @return 
     */
     function plot_data(data, type, id_division) {
-        var screen_width = document.querySelector("#interactive").clientWidth, 
-            screen_height = document.querySelector("#interactive").clientHeight;
 
         var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = parseInt(d3.select(id_division).style("width")) - margin.left - margin.right,
-            height = parseInt(d3.select(id_division).style("height")) - margin.top - margin.bottom;
+            width = 1500 - margin.left - margin.right,
+            height = 600 - margin.top - margin.bottom;
 
         var x = d3.scaleTime().range([0, width]);
         var y = d3.scaleLinear().range([height, 0]);
