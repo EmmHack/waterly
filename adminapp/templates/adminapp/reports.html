@@ -1,29 +1,268 @@
 {% extends 'adminapp/layout.html' %}
 {% block title %}
-<title> Waterly | Reports</title>
+  <title> Waterly | Reports</title>
 {% endblock %}
 
 {% block content %}
-<div class="col-md-7">
-  <div class="content-box-large animated zoomInDown">
-      <div class="panel-heading">
-          <div class="panel-title">CURRENT DEMAND</div>
-          <div class="panel-options">
-              <div class="btn-group" style="margin: 0px 10px 10px 0px;">
-                  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                    Select Consumer <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu animated zoomIn" id="add-user" role="menu">
-                    
-                  </ul>
-              </div>
-              <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-          </div>
-      </div>
-      <div class="panel-body">
-          <div id="interactive" style="width: 500">                                  
-          </div>                                  
-      </div>
-</div>
+<div class="col-md-10">
+    <div class="col-md-6">        
+    <div class="content-box-large hvr-grow">
+        <div class="panel-heading">
+            <div class="panel-title center" style="float: none; text-align: center">MOST Waterly Citizens Report</div> 
+            <br />
+            <div class="panel-options" style="float: left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                      Select Report Type <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                        <li class="hvr-grow-shadow"><a href="">Daily</a></li>
+                      <li class="hvr-grow-shadow"><a href="">Weekly</a></li>
+                      <li class="hvr-grow-shadow"><a href="">Monthly</a></li>
+                      <li class="hvr-grow-shadow"><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary hvr-grow">
+                      Generate PDF Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body animated zoomInDown">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ranking</th>
+                    <th>Consumer</th>
+                    <th>Consumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="success hvr-grow-shadow">
+                    <td>1</td>
+                    <td>Mabu Manaileng</td>
+                    <td>50L</td>
+                  </tr>
+                  <tr class="warning hvr-grow-shadow">
+                    <td>2</td>
+                    <td>Ofentswe Lebogo</td>
+                    <td>65L</td>
+                  </tr>
+                  <tr class="danger hvr-grow-shadow">
+                    <td>3</td>
+                    <td>Asive Dlaba</td>
+                    <td>100L</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div> 
+    </div>
+    </div>
+    
+    <div class="col-md-6">        
+    <div class="content-box-large hvr-grow" style="background-color: #FEDEDE">
+        <div class="panel-heading">
+            <div class="panel-title center" style="float: none; text-align: center">WORST Waterly Citizens Report</div> 
+            <br />
+            <div class="panel-options" style="float: left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                      Select Report Type <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                        <li class="hvr-grow-shadow"><a href="#">Daily</a></li>
+                      <li class="hvr-grow-shadow"><a href="#">Weekly</a></li>
+                      <li class="hvr-grow-shadow"><a href="#">Monthly</a></li>
+                      <li class="hvr-grow-shadow"><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary hvr-grow">
+                      Generate PDF Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body animated zoomInDown">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ranking</th>
+                    <th>Consumer</th>
+                    <th>Consumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="success hvr-grow-shadow">
+                    <td>1</td>
+                    <td>Mabu Manaileng</td>
+                    <td>50L</td>
+                  </tr>
+                  <tr class="warning hvr-grow-shadow">
+                    <td>2</td>
+                    <td>Ofentswe Lebogo</td>
+                    <td>65L</td>
+                  </tr>
+                  <tr class="danger hvr-grow-shadow">
+                    <td>3</td>
+                    <td>Asive Dlaba</td>
+                    <td>100L</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div> 
+    </div>
+    </div>
+    
+    <div class="col-md-12">        
+    <div class="content-box-large hvr-grow">
+        <div class="panel-heading">
+            <div class="panel-title center" style="float: none; text-align: center"> General Waterly Report</div> 
+            <div class="col-md-3">
+            <div class="panel-options" style="float: left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Select Report Type <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                     <li><a href="">Daily</a></li>
+                      <li><a href="">Weekly</a></li>
+                      <li><a href="">Monthly</a></li>
+                      <li><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Select Report Category <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                     <li><a href="">Daily</a></li>
+                      <li><a href="">Weekly</a></li>
+                      <li><a href="">Monthly</a></li>
+                      <li><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-3">
+            <div class="panel-options" style="float: left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Select the Category<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                     <li><a href="">Daily</a></li>
+                      <li><a href="">Weekly</a></li>
+                      <li><a href="">Monthly</a></li>
+                      <li><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <div class="panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                      Generate PDF Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body animated zoomInDown" id="byConsumer">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ranking</th>
+                    <th>Consumer</th>
+                    <th>Consumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="success">
+                    <td>1</td>
+                    <td>Mabu Manaileng</td>
+                    <td>50L</td>
+                  </tr>
+                  <tr class="warning">
+                    <td>2</td>
+                    <td>Ofentswe Lebogo</td>
+                    <td>65L</td>
+                  </tr>
+                  <tr class="danger">
+                    <td>3</td>
+                    <td>Asive Dlaba</td>
+                    <td>100L</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div> 
+    </div>
+    </div>
+    
+        <div class="col-md-6">        
+    <div class="content-box-large">
+        <div class="panel-heading">
+            <div class="panel-title center" style="float: none; text-align: center">MOST Waterly Citizens Report</div> 
+            <br />
+            <div class="panel-options" style="float: left">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                      Select Report Type <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu animated zoomIn" role="menu">
+                     <li><a href="">Daily</a></li>
+                      <li><a href="">Weekly</a></li>
+                      <li><a href="">Monthly</a></li>
+                      <li><a href="#">Yearly</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                      Generate PDF Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body animated zoomInDown" id="byConsumer">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Ranking</th>
+                    <th>Consumer</th>
+                    <th>Consumption</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="success">
+                    <td>1</td>
+                    <td>Mabu Manaileng</td>
+                    <td>50L</td>
+                  </tr>
+                  <tr class="warning">
+                    <td>2</td>
+                    <td>Ofentswe Lebogo</td>
+                    <td>65L</td>
+                  </tr>
+                  <tr class="danger">
+                    <td>3</td>
+                    <td>Asive Dlaba</td>
+                    <td>100L</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div> 
+    </div>
+    </div>
+    
 </div>
 {% endblock %}

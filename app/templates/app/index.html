@@ -1,297 +1,81 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  	{% load staticfiles %}
-    <title>Waterly | Home</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="shortcut icon" type="image/png" href="{% static 'app/images/waterly.png' %}"/>
-    
-    <!-- Bootstrap -->
-    <link href="{% static 'app/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- styles -->
-    <link href="{% static 'app/css/styles.css' %}" rel="stylesheet">
-    <link href="{% static 'app/css/animate.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'app/vendors/morris/morris.css' %}">
-    <link href="{% static 'app/vendors/datatables/dataTables.bootstrap.css' %}" rel="stylesheet" media="screen">
-<style> /* set the CSS */
-
-.line {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 2px;
-}
-
-</style>
-    <script>
-        function showDashboard()
-        {            
-            $('#myInsights').hide(1000);
-            $('#leaderBoardPage').hide(1000);    
-            $('#landingPage').show(2000);             
-        }
+{% extends 'app/layout.html' %}
+{% load staticfiles %}
+{% block title %}
+  <title> Waterly | Home</title>
+{% endblock %}
+{% block content %}
+<div class="col-md-10">
+    <div class="row" id="adminLandingPage">                            
+    <div class="row animated fadeInDown">
         
-        function showMyInsights()
-        {
-            $('#landingPage').hide(1000);
-            $('#leaderBoardPage').hide(1000);  
-            $('#myInsights').show(2000);            
-        }
-        
-        function showLeaderBoard()
-        {
-            $('#landingPage').hide(1000);
-            $('#myInsights').hide(1000);
-            $('#leaderBoardPage').show(2000);                     
-        }
-        
-        
-        function showLeader()
-        {
-            $('#leader').show(2000);            
-        }
-        
-    </script>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-  	<div class="header">
-	     <div class="container">
-	        <div class="row">
-	           <div class="col-md-5">
-	              <!-- Logo -->
-	              <div class="logo">
-	                 <h1><a href="">Waterly</a></h1>
-	              </div>
-	           </div>
-	           <div class="col-md-5">
-	              <div class="row">
-	                <div class="col-lg-12">
-	                  <div class="input-group form">
-	                       <input type="text" class="form-control" placeholder="Search...">
-	                       <span class="input-group-btn">
-	                         <button class="btn btn-primary" type="button">Search</button>
-	                       </span>
-	                  </div>
-	                </div>
-	              </div>
-	           </div>
-	           <div class="col-md-2">
-	              <div class="navbar navbar-inverse" role="banner">
-	                  <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
-	                    <ul class="nav navbar-nav">
-	                      <li class="dropdown">
-	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
-	                        <ul class="dropdown-menu animated zoomIn">
-	                          <li><a href="">Profile</a></li>
-	                          <li><a href="/logout/">Logout</a></li>
-	                        </ul>
-	                      </li>
-	                    </ul>
-	                  </nav>
-	              </div>
-	           </div>
-	        </div>
-	     </div>
-	</div>
-
-    <div class="page-content">
-    	<div class="row">
-		  <div class="col-md-2 animated bounceIn">
-		  	<div class="sidebar content-box" style="display: block;">
-                <ul class="nav">
-                    <!-- Main menu -->
-                    <li class="current"><a onclick="showDashboard()" ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-                    <li><a onclick="showMyInsights()"><i class="glyphicon glyphicon-calendar"></i> My Insights</a></li>
-                    <li><a onclick="showLeaderBoard()"><i class="glyphicon glyphicon-list"></i> Leader Board</a></li>
-                    <li><a href="showOverview()"><i class="glyphicon glyphicon-stats"></i> Overview</a></li>
-                    
-                </ul>
-             </div>
-		  </div>
-		  <div class="col-md-10">
-		  	<div class="row" id="landingPage">
-                            
-                            <div class="row animated fadeInDown">
-  				<div class="col-md-6">
-                                    <div class="content-box-large">
-                                        <div class="panel-heading">
-                                            <div class="panel-title text-center"><strong>Daily Champions</strong> - Waterly Citizens of the Day</div>
-                                            <div class="panel-options">
-                                                <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <table class="table" id="tbl_champs">
-				              <thead>
-				                <tr>
-				                  <th>Ranking</th>
-				                  <th>Name</th>
-				                  <th>Consumption (KL)</th>
-				                </tr>
-				              </thead>
-				              <tbody>
-				              </tbody>
-				            </table>
-		  				</div>
-		  			</div>
-  				</div>
-  				<div class="col-md-6">
-  					<div class="content-box-large">
-		  				<div class="panel-heading">
-                                                    <div class="panel-title text-center"><strong>Leader Board</strong> - Top 5 Overall Waterly Citizens</div>
-							
-							<div class="panel-options">
-								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-							</div>
-						</div>
-		  				<div class="panel-body">
-		  					<table class="table" id="tbl_overall">
-				              <thead>
-				                <tr>
-				                  <th>Ranking</th>
-				                  <th>Name</th>
-				                  <th>Consumption (KL)</th>
-				                </tr>
-				              </thead>
-				              <tbody>
-				              </tbody>
-				            </table>
-		  				</div>
-		  			</div>
-  				</div>
-  			</div>
-                            
-                            <div class="content-box-large animated zoomInDown">
-  				<div class="panel-heading ">
-                                    <div class="panel-title"><strong>Your Consumption Trend</strong></div>
-				
-					<div class="panel-options">
-						<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-					</div>
-				</div>
-  				<div class="panel-body animated bounceInUp">
-                    <svg class="plot" width="960" height="500"></svg>
-  				</div>
-  			</div>
-                            
-		  	</div>
-                      
-                      
-		  <div class="col-md-12 animated bounceInUp" id="myInsights">
-
-  			<div class="row">
-                            <div class="col-md-6">
-                                <div class="content-box-large">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">Bar Chart</div>
-                                        <div class="panel-options">
-                                            <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                                        </div>
+        <!-- MOST WATERLY TABLE -->
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-body animated zoomInDown">
+                    <div class="page page-auth clearfix">
+                        <div class="auth-container lock-screen hvr-grow">
+                            <div class="form-container">
+                                <div class="profile clearfix mb30" style="border: 1px solid transparent">
+                                    <img src="{% static 'app/images/Mabu.JPG' %}" alt="admin">
+                                    <h4 class="name">Mabu Manaileng</h4>
+                                    <p>Administrator</p>
+                                    <div class="rating text-warning">
+                                        <input type="hidden" class="rating-control" value="4" data-filled="fa fa-star" data-empty="fa fa-star-o" />
                                     </div>
-                                    <div class="panel-body animated fadeInUpBig">
-                                        <div id="catchart" style="width:100%;height:300px"></div>                                            
-                                    </div>                                        
                                 </div>
-  				</div>
-                            
-  				<div class="col-md-6 animated zoomIn">
-  					<div class="content-box-large">
-		  				<div class="panel-heading">
-							<div class="panel-title">Your consumption versus how much you pay</div>
-							
-							<div class="panel-options">
-								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-							</div>
-						</div>
-		  				<div class="panel-body">
-		  					<div id="timechart" style="width:100%;height:300px"></div>
-		  				</div>
-		  			</div>
-  				</div>
-  			</div>                      
-		  </div>
-                      
-                      
-		  	<div class="row" id="leaderBoardPage">
-                            
-                            <div class="row animated fadeInDown">
-  				<div class="col-md-12">
-                                    <div class="content-box-large">
-                                        <div class="panel-heading">
-                                            <div class="panel-title text-center">
-                                                Our Top Waterly Citizens
-                                                Click to discover how they do it...
-                                            </div>
-                                            <div class="panel-options">
-                                                <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <table id="tbl_overall1" class="table">
-				              <thead>
-				                <tr>
-				                  <th>Ranking</th>
-				                  <th>Name</th>
-				                  <th>Consumption</th>
-				                </tr>
-				              </thead>
-				              <tbody>
-				              </tbody>
-				            </table>
-		  				</div>
-		  			</div>
-  				</div>
-                            
-		  	</div>
-		</div>
-    </div>
-    </div>
-
-    <footer>
-         <div class="container">
-         
-            <div class="copy text-center">
-               Cognitive Squad. Copyright 2016
+                            </div>         
+                        </div>
+                    </div>
+                </div> 
             </div>
-            
-         </div>
-      </footer>
+        </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'app/js/jquery-2.1.3.min.js' %}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'app/vendors/morris/morris.min.js' %}"></script>
-    <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'app/js/d3.v4.min.js' %}"></script>
+        <!-- LEAST WATERLY TABLE -->
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="col-md-9 panel-title text-center">My Consumption Data</div>
+                    <div class="col-md-3 panel-options">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                      view By <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                                <li class="hvr-grow-shadow"><a href="#">Daily</a></li>
+                                <li class="hvr-grow-shadow"><a href="#">Weekly</a></li>
+                                <li class="hvr-grow-shadow"><a href="#">Monthly</a></li>
+                                <li class="hvr-grow-shadow"><a href="#">Yearly</a></li>
+                            </ul>
+                        </div>
+                    </div>                        
+                </div>
+                <div class="panel-body animated zoomInDown">
+                    <br /><br /><br />
+                </div>
+            </div>
+        </div>
         
-    <script src="{% static 'app/js/custom.js' %}"></script>
-    <script src="{% static 'app/js/submit.js' %}"></script>
-    <script src="{% static 'app/vendors/datatables/js/jquery.dataTables.min.js' %}"></script>
-    <script src="{% static 'app/js/stats.js' %}"></script>
-    
-    <!-- jQuery UI -->
-    <script src="{% static 'app/js/jquery-ui.js' %}"></script>
-
-    <script src="{% static 'app/vendors/datatables/dataTables.bootstrap.js' %}"></script>
-    
-    <script src="{% static 'app/js/tables.js' %}"></script>
-    
-    <script src="{% static 'app/vendors/jquery.knob.js' %}"></script>
-    <script src="{% static 'app/vendors/raphael-min.js' %}"></script>
-
-    <script src="{% static 'app/vendors/flot/jquery.flot.js' %}"></script>
-    <script src="{% static 'app/vendors/flot/jquery.flot.categories.js' %}"></script>
-    <script src="{% static 'app/vendors/flot/jquery.flot.pie.js' %}"></script>
-    <script src="{% static 'app/vendors/flot/jquery.flot.time.js' %}"></script>
-    <script src="{% static 'app/vendors/flot/jquery.flot.stack.js' %}"></script>
-    <script src="{% static 'app/vendors/flot/jquery.flot.resize.js' %}"></script>
-
-  </body>
-</html>
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="panel-title">Me Against Others</div>
+                    <div class="panel-options">
+                        
+                    </div>
+                </div>
+                <div class="panel-body animated zoomInDown"></div>
+            </div>
+        </div>        
+        
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">Notes</div>
+                </div>
+                <div class="panel-body animated zoomInDown"></div>
+            </div>
+        </div>        
+    </div>
+    </div>
+</div>
+{% endblock %}

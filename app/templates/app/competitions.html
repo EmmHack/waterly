@@ -1,0 +1,71 @@
+{% extends 'app/layout.html' %}
+{% block title %}
+  <title> Waterly | Competitions</title>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-10">
+    <div class="col-md-12">        
+    <div class="content-box-large hvr-grow">
+        <div class="panel-heading">
+            <div class="col-md-9 panel-title text-center">Leaderboard</div>
+            <div class="col-md-3 panel-options">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                        My Score<span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                        <li class="hvr-grow-shadow"><a href="#">My Score</a></li>
+                        <li class="hvr-grow-shadow"><a href="#">Group Score</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="panel-body animated zoomInDown"> 
+            <div class="col-md-12">        
+                <div class="content-box-large hvr-shrink" style="background-color: #FCF8E3">
+                    <div class="panel-heading">
+                        <div class="col-md-9 panel-title text-center">Hourly</div>
+                        <div class="col-md-3 panel-options">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                                    Hourly <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                                    {% for rank in rankings %}
+                                    <li class="hvr-grow-shadow"><a href="#">{{rank}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body animated zoomInDown">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ranking</th>
+                                    <th>Name</th>
+                                    <th>Score</th>
+                                    <th>Overall</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                <tr class="success hvr-grow-shadow">
+                                    <td>{{item}}</td>
+                                    <td>Mabu Manaileng</td>
+                                    <td>500</td>
+                                    <td>5K</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div> 
+    </div>
+    </div>    
+</div>
+{% endblock %}

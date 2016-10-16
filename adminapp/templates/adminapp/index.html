@@ -4,181 +4,135 @@
 {% endblock %}
 {% block content %}
 <div class="col-md-10">
-	  	<div class="row" id="adminLandingPage">                            
-            <div class="row animated fadeInDown">
-					<div class="col-md-6">
-                    <div class="content-box-large">
-                        <div class="panel-heading">
-                            <div class="panel-title text-center">Waterly Citizens by Category</div>
-                            <div class="panel-options">
-                                <div class="btn-group" style="margin: 0px 10px 10px 0px;">
-                                    <button type="button" onclick="byCosumer()" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                      by Consumer <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu animated zoomIn" role="menu">
-                                      <li><a href="">by Consumer</a></li>
-                                      <li><a href="">by Complex</a></li>
-                                      <li><a onclick="bySchool()">by School</a></li>
-                                      <li><a href="#">by Company</a></li>
-                                      <li><a onclick="byMunicipality()">by Municipality</a></li>
-                                      <li><a href="#">by Province</a></li>
-                                    </ul>
-                                </div>
-								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                            </div>
+    <div class="row" id="adminLandingPage">                            
+    <div class="row animated fadeInDown">
+        
+        <!-- MOST WATERLY TABLE -->
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">MOST Waterly Citizens</div>
+                    <div class="panel-options">
+                        <div class="btn-group" style="margin: 0px 10px 10px 0px;">
+                            <button type="button" class="btn btn-primary hvr-grow dropdown-toggle" data-toggle="dropdown">
+                              Select Category <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                            <li class="hvr-grow-shadow"><a href="">Household</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Property</a></li>
+                            <li class="hvr-grow-shadow"><a href="">School</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Company</a></li>
+                            <li class="hvr-grow-shadow"><a href="">University</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Hospital</a></li>
+                        </ul>
                         </div>
-                        <div class="panel-body animated zoomInDown" id="byConsumer">
-                            <table class="table">
-				              <thead>
-				                <tr>
-				                  <th>Ranking</th>
-				                  <th>Consumer</th>
-				                  <th>Consumption</th>
-				                </tr>
-				              </thead>
-				              <tbody>
-				                <tr class="success">
-				                  <td>1</td>
-				                  <td>Mabu Manaileng</td>
-				                  <td>50L</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>2</td>
-				                  <td>Ofentswe Lebogo</td>
-				                  <td>65L</td>
-				                </tr>
-				                <tr class="danger">
-				                  <td>3</td>
-				                  <td>Asive Ndlaba</td>
-                                  <td>100L</td>
-				                </tr>
-				              </tbody>
-				            </table>
-	  				</div>
-                                    
-                     <!-- BY MUNI-->
-                    <div class="panel-body animated" id="byMunicipality" hidden>
-                        <table class="table">
-			              <thead>
-			                <tr>
-			                  <th>Ranking</th>
-			                  <th>Municipality</th>
-			                  <th>Consumption</th>
-			                </tr>
-			              </thead>
-			              <tbody>
-			                <tr class="success">
-			                  <td>1</td>
-			                  <td>Ekurhuleni</td>
-			                  <td>5000L</td>
-			                </tr>
-			                <tr class="danger">
-			                  <td>2</td>
-			                  <td>Tshwane</td>
-			                  <td>12 000L</td>
-			                </tr>
-			              </tbody>
-			            </table>
-	  				</div>
-                                    
-                        <!-- BY SCHOOL-->
-                        <div class="panel-body animated" id="bySchool" hidden>
-                            <table class="table">
-				              <thead>
-				                <tr>
-				                  <th>Ranking</th>
-				                  <th>School Name</th>
-				                  <th>Consumption</th>
-				                </tr>
-				              </thead>
-				              <tbody>
-				                <tr class="success">
-				                  <td>1</td>
-				                  <td>Ekurhuleni City High</td>
-				                  <td>800L</td>
-				                </tr>
-				                <tr class="warning">
-				                  <td>2</td>
-				                  <td>Ekurhuleni Girls High</td>
-				                  <td>1300L</td>
-				                </tr>
-				              </tbody>
-				            </table>
-	  					</div>
-	  			</div>
-				</div>
-                            
-				<div class="col-md-6">
-                <div class="content-box-large">
-                    <div class="panel-heading">
-                        <div class="panel-title text-center">WORST Waterly Citizens by Category</div>
-                        <div class="panel-options">
-                            <div class="btn-group" style="margin: 0px 10px 10px 0px;"> 
-                                <button type="button" onclick="WbyConsumer()" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                  by Consumer <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu animated zoomIn" role="menu">
-                                  <li><a onclick="WbyConsumer()">by Consumer</a></li>
-                                  <li><a href="">by Complex</a></li>
-                                  <li><a href="#">by School</a></li>
-                                  <li><a onclick="WbyCompany()">by Company</a></li>
-                                  <li><a>by Municipality</a></li>
-                                  <li><a href="#">by Province</a></li>
-                                </ul>
-                            </div>
-							<a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
-                        </div>
+                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
                     </div>
-                    <div class="panel-body animated zoomInDown" id="WbyConsumer">
-                        <table class="table">
-			              <thead>
-			                <tr>
-			                  <th>Ranking</th>
-			                  <th>Consumer</th>
-			                  <th>Consumption</th>
-			                </tr>
-			              </thead>
-			              <tbody>
-			                <tr class="danger">
-			                  <td>1</td>
-			                  <td>Dave Mabaso</td>
-			                  <td>4000L</td>
-			                </tr>
-			                <tr class="danger">
-			                  <td>2</td>
-			                  <td>Mbangiso Mabaso</td>
-			                  <td>3000L</td>
-			                </tr>
-			              </tbody>
-			            </table>
-						</div>
-                    
-                    <div class="panel-body animated zoomInDown" id="WbyCompany" hidden>
-                        <table class="table">
-			              <thead>
-			                <tr>
-			                  <th>Ranking</th>
-			                  <th>Company Name</th>
-			                  <th>Consumption</th>
-			                </tr>
-			              </thead>
-			              <tbody>
-			                <tr class="danger">
-			                  <td>1</td>
-			                  <td>Huawei</td>
-			                  <td>8000L</td>
-			                </tr>
-			                <tr class="danger">
-			                  <td>2</td>
-			                  <td>Telkom</td>
-			                  <td>7000L</td>
-			                </tr>
-			              </tbody>
-			            </table>
-					</div>
-				</div>
-				</div>
-			</div>                            
-	  	</div>                      
-	</div>
+                </div>
+                <div class="panel-body animated zoomInDown" id="byConsumer">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>Ranking</th>
+                            <th>Consumer</th>
+                            <th>Consumption</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="hvr-grow-shadow success">
+                            <td>1</td>
+                            <td>Mabu Manaileng</td>
+                            <td>50L</td>
+                          </tr>
+                          <tr class="hvr-grow-shadow warning">
+                            <td>2</td>
+                            <td>Ofentswe Lebogo</td>
+                            <td>65L</td>
+                          </tr>
+                          <tr class="hvr-grow-shadow danger">
+                            <td>3</td>
+                            <td>Asive Dlaba</td>
+                            <td>100L</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div> 
+            </div>
+        </div>
+
+        <!-- LEAST WATERLY TABLE -->
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">LEAST Waterly Citizens</div>
+                    <div class="panel-options">
+                        <div class="btn-group" style="margin: 0px 10px 10px 0px;"> 
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                Select Category <span class="caret"></span></button>
+                        <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                            <li class="hvr-grow-shadow"><a href="">Household</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Property</a></li>
+                            <li class="hvr-grow-shadow"><a href="">School</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Company</a></li>
+                            <li class="hvr-grow-shadow"><a href="">University</a></li>
+                            <li class="hvr-grow-shadow"><a href="">Hospital</a></li>
+                        </ul>
+                    </div>
+                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                </div>
+            </div>
+            <div class="panel-body animated zoomInDown" id="WbyConsumer">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Ranking</th>
+                        <th>Consumer</th>
+                        <th>Consumption</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="danger">
+                        <td>1</td>
+                        <td>Dave Mabaso</td>
+                        <td>4000L</td>
+                      </tr>
+                      <tr class="danger">
+                        <td>2</td>
+                        <td>Mbangiso Mabaso</td>
+                        <td>3000L</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        
+        <!-- LIVE CONSUMPTION DATA -->
+        <div class="col-md-12">
+            <div class="content-box-large hvr-shrink">
+                <div class="panel-heading">
+                    <div class="panel-title text-center">Current Consumption</div>
+                    <div class="panel-options">
+                        <div class="btn-group" style="margin: 0px 10px 10px 0px;">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                              Select Category <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu text-center animated zoomIn" role="menu">
+                                <li class="hvr-grow-shadow"><a href="">Household</a></li>
+                                <li class="hvr-grow-shadow"><a href="">Property</a></li>
+                                <li class="hvr-grow-shadow"><a href="">School</a></li>
+                                <li class="hvr-grow-shadow"><a href="">Company</a></li>
+                                <li class="hvr-grow-shadow"><a href="">University</a></li>
+                                <li class="hvr-grow-shadow"><a href="">Hospital</a></li>
+                        </ul>
+                        </div>
+                        <a href="#" data-rel="reload"><i class="glyphicon glyphicon-refresh"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body animated zoomInDown"></div>
+            </div>
+        </div>        
+    </div>
+    </div>
+</div>
 {% endblock %}
