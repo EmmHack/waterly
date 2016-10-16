@@ -30,9 +30,86 @@ class Home(View):
         """
         return render(request, self.template_name)
 
+class Login(View):
+    template_name = 'app/login.html'
 
-class Registration(View):
-    template_name = 'app/register.html'
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+    
+class Activities(View):
+    template_name = 'app/activities.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        activities = ["Shower/Bath", "Laundry", "Car Wash", "Water the Gardern", "Fill the Pool"]
+        return render(request, self.template_name, {"activities": activities})
+
+class Competitions(View):
+    template_name = 'app/competitions.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        items = [1,2,3,4,5]
+        rankings = ["Hourly", "Daily", "Weekly", "Monthly", "Yearly"]
+        return render(request, self.template_name, {"items":items,"rankings":rankings})
+    
+class Tips(View):
+    template_name = 'app/tips.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+
+class Profile(View):
+    template_name = 'app/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+
+class AdminLogin(View):
+    template_name = 'app/login.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -47,6 +124,54 @@ class Registration(View):
         return render(request, self.template_name)
 
 
+class Maintenance(View):
+    template_name = 'app/maintenance.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+
+
+class Reports(View):
+    template_name = 'app/reports.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+
+
+class Predictions(View):
+    template_name = 'app/prediction.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)
+    
+    
 class GenerateRandomData(View):
     """Generate random data which simulates smart meters.
     

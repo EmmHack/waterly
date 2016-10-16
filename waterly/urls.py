@@ -15,21 +15,32 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from app.views import Home,Registration
+from app.views import Home, Login, Competitions, Activities, Tips, Profile
+
 from adminapp.views import AdminDashboard, Predictions, Reports, AdminLogin, \
     Maintenance
 from app.views import GenerateRandomData, UploadFixture
 
 urlpatterns = [
-
+    
+    # API    
+    url(r'^api/', include('api.urls')),
+    
+    # Consumer App Views
     url(r'^()$',Home.as_view()),
-    url(r'^signup',Registration.as_view()),
-    url(r'^adminapp', AdminDashboard.as_view()),
+    url(r'^app', Home.as_view()),
+    url(r'^login', Login.as_view()),
+    url(r'^competitions', Competitions.as_view()),
+    url(r'^activities', Activities.as_view()),
+    url(r'^tips', Tips.as_view()),
+    url(r'^profile', Profile.as_view()),
+    
+    # Admin App Views
     url(r'^adminlogin', AdminLogin.as_view()),
+    url(r'^adminapp', AdminDashboard.as_view()),
     url(r'^reports', Reports.as_view()),
     url(r'^maintenance', Maintenance.as_view()),
     url(r'^predictions', Predictions.as_view()),
-    url(r'^api/', include('api.urls')),
     url(r'^app/gen_rand_data$', GenerateRandomData.as_view(),
         name='gen_rand_data'),
     url(r'^app/upload_fixture$', UploadFixture.as_view(),

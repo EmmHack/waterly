@@ -20,7 +20,7 @@
 	           <div class="col-md-5">
 	              <!-- Logo -->
 	              <div class="logo">
-	                 <h1><a href="../adminapp/">Waterly</a></h1>
+	                 <h1><a href="../app/">Waterly</a></h1>
 	              </div>
 	           </div>
 	           <div class="col-md-5">
@@ -40,7 +40,7 @@
                <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                  <ul class="nav navbar-nav">
                    <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                      <ul class="dropdown-menu animated zoomIn">
                          <li class="hvr-grow"><a href="profile.html">Profile</a></li>
                        <li class="hvr-grow"><a href="../adminlogin/">Logout</a></li>
@@ -60,12 +60,11 @@
           <div class="sidebar content-box hvr-grow" style="display: block; position: fixed">
     <ul class="nav">
       <!-- Main menu -->
-      <li class="hvr-float-shadow"><a href="../adminapp/"  ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-      <li class="hvr-float-shadow"><a href="../reports/"><i class="glyphicon glyphicon-stats"></i> Reports </a></li>
-      <li class="hvr-float-shadow"><a href="../predictions/"><i class="glyphicon glyphicon-signal"></i> Predictions</a></li>
-      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-tint"></i> Admin</a></li>
-      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-globe"></i> Overview</a></li>
-      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-cog"></i> Settings</a></li>
+      <li class="hvr-float-shadow"><a href="../app/"  ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
+      <li class="hvr-float-shadow"><a href="../competitions/"><i class="glyphicon glyphicon-stats"></i>Competitions</a></li>
+      <li class="hvr-float-shadow"><a href="../activities/"><i class="glyphicon glyphicon-stats"></i> Activities </a></li>
+      <li class="hvr-float-shadow"><a href="../predictions/"><i class="glyphicon glyphicon-signal"></i> Tips</a></li>
+      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-tint"></i> Profile</a></li>
     </ul>
     </div>
 		  </div>
@@ -74,7 +73,7 @@
 		{% endblock %}
 
 	</div>
-  {% include "adminapp/footer.html" %}
+  {% include "app/footer.html" %}
 {% block js %}
     <script src="{% static 'app/js/jquery/jquery.js' %}"></script>
     <script src="{% static 'app/js/jquery/jquery-2.2.3.min.js' %}"></script>
@@ -86,7 +85,6 @@
     <script src="{% static 'app/js/custom.js' %}"></script>
     <script src="{% static 'app/js/d3.v3.min.js' %}" type="text/javascript"></script>
 	<script src="{% static 'app/js/d3_visualisations.js' %}" type="text/javascript"></script>
-	<script src="{% static 'app/js/stats.js' %}"></script>
 {% endblock %}
 </body>
 </html>
