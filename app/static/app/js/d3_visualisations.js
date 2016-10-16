@@ -7,7 +7,7 @@ $(function() {
     var bar_svg = null;
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
     var parseDateTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
-    var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S-%H:%M");
+    var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S+%H:%M");
     var hours_data = null;
     var days_data = null;
     var months_data = null;
@@ -62,22 +62,21 @@ $(function() {
 
         get_consumer_consumption(parseInt(chosen_customer));
         visualise();
-        
     });
 
     function visualise() {
         if (years_data.length >= 3) {
             plot_data(hours_data, 0, '#interactive');
-            bar_plot(months_data);
+            bar_plot(hours_data);
         } else if (months_data.length >= 6) {
             plot_data(months_data, 0, '#interactive');
             bar_plot(months_data);
         } else if (days_data.length >= 15) {
             plot_data(days_data, 0, '#interactive');
-            bar_plot(months_data);
+            bar_plot(days_data);
         } else {
             plot_data(hours_data, 1, '#interactive');
-            bar_plot(months_data);
+            bar_plot(hours_data);
         }
     }
 
@@ -142,14 +141,15 @@ $(function() {
     */
     function bar_plot(data) {
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 500 - margin.left - margin.right,
+            width = 700 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
        
         var x = d3.scaleBand().range([0, width]).padding(0.1);
         var y = d3.scaleLinear().range([height, 0]);
 
         x.domain(data.map(function(d) { return getDate(d.date); }));
-        y.domain([d3.max(data, function(d) { return d.reading; })-10, d3.max(data, function(d) { return d.reading; })]);
+        y.domain([d3.max(data, function(d) { return d.reading; })-10,
+                  d3.max(data, function(d) { return d.reading; })]);
         
         if(bar_svg == null) {
             bar_svg = d3.select("#catchart").append("svg")
@@ -208,16 +208,17 @@ $(function() {
 
     /**
     *   function that plot area-scatter chart
-    *   @param data => objects; type => time choice; id_division
+    *   @param data => objects;
+    *   @param type => time choice;
+    *   @param id_division
     *   @return 
     */
     function plot_data(data, type, id_division) {
-        console.log(data);
         var screen_width = document.querySelector("#interactive").clientWidth, 
             screen_height = document.querySelector("#interactive").clientHeight;
 
         var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
+            width = 1500 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
         var x = d3.scaleTime().range([0, width]);
@@ -244,21 +245,18 @@ $(function() {
         data.forEach(function(d) {
             if (type == 0) {
                 d.date = parseTime(d.date);
-            }
-            else {
+            } else {
                 d.date = parseDateTime(d.date);
             }
 
             d.reading = +d.reading;
         });
 
-        console.log(data);
-
-      data = data.sort(sortByDateAscending);
-      console.log(data);
+        data = data.sort(sortByDateAscending);
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([d3.min(data, function(d) { return d.reading; })-10, d3.max(data, function(d) { return d.reading; })]);
+        y.domain([d3.min(data, function(d) { return d.reading; })-10,
+                  d3.max(data, function(d) { return d.reading; })]);
 
          // DON'T DELETE YOU WILL GET YOURSELF KILLED.
         /*svg.append("path")
@@ -321,8 +319,7 @@ $(function() {
             var focus = svg.append("g")
             .attr("class", "focus")
             .style("display", "none");
-        }
-        else {
+        } else {
             var trans = d3.transition()
                 .duration(750);
 
@@ -343,7 +340,6 @@ $(function() {
 
             svg.select("g .y-axis")
                 .call(d3.axisLeft(y));
-
         }
     }
 });
