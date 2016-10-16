@@ -2,12 +2,13 @@ $(function(){
 
   var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
   var consumers = null;
   var chosen_customer = null;
   var svg = null;
   var bar_svg = null;
   var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+  var parseDateTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
+  var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S-%H:%M");
 
   url = 'api/consumers/'
   $.ajax({
@@ -21,21 +22,22 @@ $(function(){
 
   var hours_data = null;
 
-    url = 'api/list_consumption_reading/'+consumers[0].meter_no;
-    $.ajax({
-        type : 'GET',
-        url  : url,
-        async: false,
-        success :  function(data){
-            hours_data = data;
-        }
-    });
+  url = 'api/list_consumption_reading/'+consumers[0].meter_no;
+  $.ajax({
+      type : 'GET',
+      url  : url,
+      async: false,
+      success :  function(data){
+          hours_data = data;
+      }
+  });
+  get_hourly();
 
-    var days_data = retrieve_data('day');
-    var months_data = retrieve_data('month');
-    var years_data = retrieve_data('year');
-    var parseDateTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
-    var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S-%H:%M");
+function get_hourly(){
+  var days_data = retrieve_data('day');
+  var months_data = retrieve_data('month');
+  var years_data = retrieve_data('year');
+
 
 if (years_data.length >= 3){
 
@@ -60,6 +62,9 @@ else if (days_data.length >= 15){
     bar_plot(months_data);
 
 }
+
+}
+
 /**
 *   function that retrive data fro a choosen date time range
 *   @param level => as day or month or hours or weeks
@@ -110,65 +115,8 @@ function retrieve_data(level){
         }
     });
 
-    var days_data = retrieve_data('day');
-    var months_data = retrieve_data('month');
-    var years_data = retrieve_data('year');
-    var parseDateTime = d3.timeParse("%Y-%m-%dT%H:%M:%SZ");
-    var parseTime  = d3.timeParse("%Y-%m-%dT%H:%M:%S-%H:%M");
-
-
-if (years_data.length >= 3){
-
-    plot_data(hours_data, 0,'#interactive');
-    bar_plot(months_data);
-
-} 
-else if (months_data.length >= 6){
-
-    plot_data(months_data, 0,'#interactive');
-    bar_plot(months_data);
-
-}
-else if (days_data.length >= 15){
-
-    plot_data(days_data, 0,'#interactive');
-    bar_plot(months_data);
-
-}else{
-
-    plot_data(hours_data, 1,'#interactive');
-    bar_plot(months_data);
-
-}
-/**
-*   function that retrive data fro a choosen date time range
-*   @param level => as day or month or hours or weeks
-*   @return average => average kilolitres of water used
-*/
-function retrieve_data(level){
-
-    var groupdata = _.groupBy(hours_data, function(data) {
-        return moment(data.date).startOf(level).format();
-    });
-
-    var averages = [];
-
-    $.each(groupdata, function (date, group) {
-        var sum = 0;
-
-        $.each(group, function (index, consumption) {
-              sum += consumption.reading;
-        });
-        
-        var average = sum / group.length;
-
-        var data = {'reading': average, 'date': date};
-        averages.push(data);
-    });
-
-  return averages;
-}
-
+    get_hourly();
+    
 });
 
 /**
@@ -205,12 +153,11 @@ function bar_plot(data){
     if(bar_svg == null)
     {
       bar_svg = d3.select("#catchart").append("svg")
-          .attr("width", width + margin.left + margin.right)
+          .attr("width", "100%")
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    
       data.forEach(function(d) {
           d.date = d.date;
           d.reading = +d.reading;
