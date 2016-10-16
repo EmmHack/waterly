@@ -5,7 +5,7 @@ from api.models import Consumer, Consumption, Address, AvgMunicConsumption
 class ConsumerSerialiser(serializers.ModelSerializer):
     class Meta:
         model = Consumer
-        fields = ['meter_no', 'name', 'created_at', 'modified_at']
+        fields = ['meter_no', 'name', 'created_at', 'modified_at','group_name']
 
 class ConsumptionSerialiser(serializers.ModelSerializer):
     class Meta:

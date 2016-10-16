@@ -6,6 +6,7 @@ from django.db import models
 class Consumer(models.Model):
     meter_no = models.CharField(max_length=15, primary_key=True)
     name = models.CharField(max_length=30)
+    group_name = models.CharField(max_length=30)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
 
@@ -43,3 +44,21 @@ class AvgMunicConsumption(models.Model):
     munic_name = models.CharField(max_length=30, primary_key=True)
     date = models.DateTimeField()
     avg_reading = models.FloatField()
+
+
+class Winners(models.Model):
+    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    indiv_win = models.BooleanField()
+    group_win = models.BooleanField()
+    indv_score = models.FloatField()
+    group_score = models.FloatField()
+
+
+class Loosers(models.Model):
+    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
+    date = models.DateTimeField()
+    indiv_loss = models.BooleanField()
+    group_loss = models.BooleanField()
+    indv_score = models.FloatField()
+    group_score = models.FloatField()

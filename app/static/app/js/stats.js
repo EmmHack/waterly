@@ -11,6 +11,8 @@ $(function() {
         }
     });
 
+    console.log(consumers);
+
     // Get latest data
     setInterval(gen_latest_data, 3600000)
     gen_latest_data();
@@ -47,18 +49,26 @@ $(function() {
         async: false,
     });
 
-    var data = []
-    for (var i = 0; i < 5; i++) {
-         var d = {}
-         d['reading'] = consumptions[i]['reading'];
-         d['meter_no'] = consumptions[i]['consumer']
-         data.push(d);
+    var data = [];
+    var winners = [];
+    var max_winners = 5;
+    for (var i = 0; i < max_winners; i++) {
+        var d = {};
+        if(winners.indexOf(consumptions[i]['consumer']) == -1) {
+            winners.push(consumptions[i]['consumer']);
+            d['reading'] = consumptions[i]['reading'];
+            d['meter_no'] = consumptions[i]['consumer'];
+            data.push(d);
+        } else {
+            max_winners += 1;
+        }
     }
     
     for (var i = 0; i < consumers.length; i++) {
         for (var j = 0; j < data.length; j++) {
             if (data[j]['meter_no'] === consumers[i]['meter_no']) {
                 data[j]['name'] = consumers[i]['name'];
+                data[j]['group_name'] = consumers[i]['group_name'];
             }
         }
     }
@@ -75,7 +85,8 @@ $(function() {
     for (var i = 7; i < 11; i++) {
         var d = {};
         d['reading'] = consumptions[i]['reading'];
-        d['meter_no'] = consumptions[i]['consumer'];        
+        d['meter_no'] = consumptions[i]['consumer'];
+        d['group_name'] = consumptions[i]['group_name'];        
         names_important.push(d);
     
     }
@@ -87,17 +98,20 @@ $(function() {
             $("#tbl_champs").append("<tr class='success' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }else if (i < 4) {
             $("#tbl_champs").append("<tr class='warning' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }
         else {
             $("#tbl_champs").append("<tr class='danger' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }
     }
@@ -121,24 +135,30 @@ $(function() {
                                      "</td></tr>");
         }
     }
+    
+    for (var i = 0; i < data.length; i++) {
 
-    for (var i = 0; i < names_important.length; i++) {
         if(i < 2){
-            $("#tbl_overall1").append("<tr class='success' ><td>" + (i+1) +
-                                      "</td><td>" + names_important[i]['meter_no'] +
-                                      "</td><td>" + names_important[i]['reading'] +
-                                      "</td></tr>");
+            $("#tbl_leader").append("<tr class='success' ><td>" + (i+1) +
+                                    "</td><td>" + data[i]['name'] +
+                                    "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
+                                    "</td></tr>");
         }else if (i < 4) {
-            $("#tbl_overall1").append("<tr class='warning' ><td>" + (i+1) +
-                                      "</td><td>" + names_important[i]['meter_no'] +
-                                      "</td><td>" + names_important[i]['reading'] +
-                                      "</td></tr>");
+            $("#tbl_leader").append("<tr class='warning' ><td>" + (i+1) +
+                                    "</td><td>" + data[i]['name'] +
+                                    "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
+                                    "</td></tr>");
         }
         else {
-            $("#tbl_overall1").append("<tr class='danger' ><td>" + (i+1) +
-                                      "</td><td>" + names_important[i]['meter_no'] +
-                                      "</td><td>" + names_important[i]['reading'] +
-                                      "</td></tr>");
+            $("#tbl_leader").append("<tr class='danger' ><td>" + (i+1) +
+                                    "</td><td>" + data[i]['name'] +
+                                    "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
+                                    "</td></tr>");
         }
+    
+
     }
 });
