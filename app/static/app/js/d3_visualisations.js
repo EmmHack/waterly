@@ -55,29 +55,27 @@ $(function() {
 
     get_consumer_consumption(consumers[0].meter_no);
     visualise();
-    
 
     $("#add-user").on('click', 'li', function () {
         chosen_customer = $(this.id).selector;
 
         get_consumer_consumption(parseInt(chosen_customer));
         visualise();
-        
     });
 
     function visualise() {
         if (years_data.length >= 3) {
             plot_data(hours_data, 0, '#interactive');
-            bar_plot(months_data);
+            bar_plot(hours_data);
         } else if (months_data.length >= 6) {
             plot_data(months_data, 0, '#interactive');
             bar_plot(months_data);
         } else if (days_data.length >= 15) {
             plot_data(days_data, 0, '#interactive');
-            bar_plot(months_data);
+            bar_plot(days_data);
         } else {
             plot_data(hours_data, 1, '#interactive');
-            bar_plot(months_data);
+            bar_plot(hours_data);
         }
     }
 
@@ -142,7 +140,7 @@ $(function() {
     */
     function bar_plot(data) {
         var margin = {top: 20, right: 20, bottom: 30, left: 40},
-            width = 500 - margin.left - margin.right,
+            width = 700 - margin.left - margin.right,
             height = 300 - margin.top - margin.bottom;
        
         var x = d3.scaleBand().range([0, width]).padding(0.1);
@@ -177,8 +175,10 @@ $(function() {
                 .on("mousemove",function(d){
                     tooltip.style("left", (d3.event.pageX - 50) + "px")
                         .style("top", (d3.event.pageY - 70) + "px")
-                        .style("display", "inline-block")
                         .html("<hr/>"+(d.date) + "<br>" + (d.reading));
+                })
+                .on("mouseout", function(d) {
+                    tooltip.style("display", "none");
                 });
                 
             bar_svg.append("g")
@@ -209,17 +209,18 @@ $(function() {
 
     /**
     *   function that plot area-scatter chart
-    *   @param data => objects; type => time choice; id_division
+    *   @param data => objects;
+    *   @param type => time choice;
+    *   @param id_division
     *   @return 
     */
     function plot_data(data, type, id_division) {
-        console.log(data);
         var screen_width = document.querySelector("#interactive").clientWidth, 
             screen_height = document.querySelector("#interactive").clientHeight;
 
         var margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+            width = parseInt(d3.select(id_division).style("width")) - margin.left - margin.right,
+            height = parseInt(d3.select(id_division).style("height")) - margin.top - margin.bottom;
 
         var x = d3.scaleTime().range([0, width]);
         var y = d3.scaleLinear().range([height, 0]);
@@ -245,8 +246,7 @@ $(function() {
         data.forEach(function(d) {
             if (type == 0) {
                 d.date = parseTime(d.date);
-            }
-            else {
+            } else {
                 d.date = parseDateTime(d.date);
             }
 
@@ -256,7 +256,7 @@ $(function() {
         data = data.sort(sortByDateAscending);
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([d3.min(data, function(d) { return d.reading; })-10, 
+        y.domain([d3.min(data, function(d) { return d.reading; })-10,
                   d3.max(data, function(d) { return d.reading; })]);
 
          // DON'T DELETE YOU WILL GET YOURSELF KILLED.
@@ -267,7 +267,7 @@ $(function() {
 
         if(svg == null) {
             svg = d3.select(id_division).append("svg")
-                .attr("width", "100%")
+                .attr("width", width + margin.top + margin.bottom)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform","translate(" + margin.left + "," +
@@ -320,8 +320,7 @@ $(function() {
             var focus = svg.append("g")
             .attr("class", "focus")
             .style("display", "none");
-        }
-        else {
+        } else {
             var trans = d3.transition()
                 .duration(750);
 
@@ -342,7 +341,25 @@ $(function() {
 
             svg.select("g .y-axis")
                 .call(d3.axisLeft(y));
-
         }
+
+          /*function resize() {
+          var width = parseInt(d3.select(id_division).style("width")) - margin*2,
+          height = parseInt(d3.select(id_division).style("height")) - margin*2;
+
+          svg.select('.x-axis')
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+          svg.select('.y-axis')
+            .call(d3.axisLeft(y));
+
+          svg.selectAll('.path')
+            .attr("d", area);
+        }
+
+        d3.select(window).on('resize', resize); 
+
+        resize();*/
     }
 });
