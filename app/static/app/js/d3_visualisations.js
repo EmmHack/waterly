@@ -149,7 +149,8 @@ $(function() {
         var y = d3.scaleLinear().range([height, 0]);
 
         x.domain(data.map(function(d) { return getDate(d.date); }));
-        y.domain([d3.max(data, function(d) { return d.reading; })-10, d3.max(data, function(d) { return d.reading; })]);
+        y.domain([d3.max(data, function(d) { return d.reading; })-10,
+                  d3.max(data, function(d) { return d.reading; })]);
         
         if(bar_svg == null) {
             bar_svg = d3.select("#catchart").append("svg")
@@ -252,13 +253,11 @@ $(function() {
             d.reading = +d.reading;
         });
 
-        console.log(data);
-
-      data = data.sort(sortByDateAscending);
-      console.log(data);
+        data = data.sort(sortByDateAscending);
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain([d3.min(data, function(d) { return d.reading; })-10, d3.max(data, function(d) { return d.reading; })]);
+        y.domain([d3.min(data, function(d) { return d.reading; })-10, 
+                  d3.max(data, function(d) { return d.reading; })]);
 
          // DON'T DELETE YOU WILL GET YOURSELF KILLED.
         /*svg.append("path")
