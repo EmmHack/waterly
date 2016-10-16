@@ -11,6 +11,8 @@ $(function() {
         }
     });
 
+    console.log(consumers);
+
     // Get latest data
     setInterval(gen_latest_data, 3600000)
     gen_latest_data();
@@ -87,17 +89,20 @@ $(function() {
             $("#tbl_champs").append("<tr class='success' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }else if (i < 4) {
             $("#tbl_champs").append("<tr class='warning' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }
         else {
             $("#tbl_champs").append("<tr class='danger' ><td>" + (i+1) +
                                     "</td><td>" + data[i]['name'] +
                                     "</td><td>" + data[i]['reading'] +
+                                    "</td><td>" + data[i]['group_name'] +
                                     "</td></tr>");
         }
     }
