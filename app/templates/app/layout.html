@@ -61,10 +61,17 @@
       <!-- Main menu -->
       <li class="hvr-float-shadow"><a href="../app/"  ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
       <li class="hvr-float-shadow"><a href="../competitions/"><i class="glyphicon glyphicon-stats"></i>Competitions</a></li>
+<<<<<<< HEAD
       <li class="hvr-float-shadow"><a href="../restrictions/"><i class="glyphicon glyphicon-stats"></i>Restrictions</a></li>
       <li class="hvr-float-shadow"><a href="../tips/"><i class="glyphicon glyphicon-signal"></i> Tips</a></li>
       <li class="hvr-float-shadow"><a href="../tariffs/"><i class="glyphicon glyphicon-signal"></i> Tariffs</a></li>
       <li class="hvr-float-shadow"><a href="../profile/"><i class="glyphicon glyphicon-tint"></i> Profile</a></li>
+=======
+      <li class="hvr-float-shadow"><a href="../activities/"><i class="glyphicon glyphicon-stats"></i> Activities </a></li>
+      <li class="hvr-float-shadow"><a href="../predictions/"><i class="glyphicon glyphicon-signal"></i> Tips</a></li>
+      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-tint"></i> Profile</a></li>
+      <li class="hvr-float-shadow"><a href="../predictions/"><i class="glyphicon glyphicon-signal"></i> Predictions</a></li>
+>>>>>>> 66b276e2a2aaf34f84928e1e05f4c1f60e037725
     </ul>
     </div>
 		  </div>
@@ -76,7 +83,6 @@
         </div>
   {% include "app/footer.html" %}
 {% block js %}
-    <script src="{% static 'app/js/jquery/jquery.js' %}"></script>
     <script src="{% static 'app/js/jquery/jquery-2.2.3.min.js' %}"></script>
     <script src="{% static 'app/js/jquery/jquery-ui.js' %}"></script>
     <script src="{% static 'app/js/bootstrap.min.js' %}"></script>
@@ -84,8 +90,9 @@
     <script src="{% static 'app/js/flot/jquery.flot.resize.min.js' %}"></script>
     <script src="{% static 'app/js/flot/jquery.flot.categories.min.js' %}"></script>
     <script src="{% static 'app/js/custom.js' %}"></script>
-    <script src="{% static 'app/js/d3.v3.min.js' %}" type="text/javascript"></script>
-	<script src="{% static 'app/js/d3_visualisations.js' %}" type="text/javascript"></script>
+    <script src="{% static 'app/js/d3.v4.min.js' %}" type="text/javascript"></script>
+	  <script src="{% static 'app/js/d3_visualisations.js' %}" type="text/javascript"></script>
+    <script src="{% static 'app/js/stats.js' %}"></script>
 {% endblock %}
 </body>
 </html>
