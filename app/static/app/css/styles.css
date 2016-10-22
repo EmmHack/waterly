@@ -21,6 +21,11 @@ body {
   margin-top: 30px;
 }
 
+/*Last Div*/
+.last{
+    margin-bottom: 60px;
+}
+
 /* Footer */
 
 footer{
@@ -33,6 +38,7 @@ footer{
    bottom: 0px;
    left:0px;
    right:0px;
+   position: fixed;
 }
 
 footer a{
@@ -161,6 +167,7 @@ footer .copy{
 .header .dropdown-menu li a {
    color: #fff;
    padding-left:0px !important;
+   text-transform: capitalize;
 }
 
 .header .dropdown-menu li:last-child{
@@ -600,7 +607,6 @@ body {
 
 /* Mobile phones */
 @media (max-width: 480px){
-
 }
 
 /* Tablets */
@@ -623,7 +629,6 @@ body {
    .navbar-toggle {
       margin-right:0px !important;
    }
-}
 
 /* Desktop */
 
@@ -677,8 +682,6 @@ body {
 .area {
   fill: steelblue;
 }
-<<<<<<< HEAD
-=======
 
 .toolTip {
   position: absolute;
@@ -695,4 +698,3 @@ body {
   width: 100%;
   height: 500px;
 }
->>>>>>> b01556c5e82d3da1ac9fb8cf632f1cc6fead8399

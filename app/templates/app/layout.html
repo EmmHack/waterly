@@ -12,7 +12,6 @@
 	{% block title %}
 	{% endblock %}
 </head>
-
 <body>
 	<div class="header">
 	     <div class="container">
@@ -40,10 +39,10 @@
                <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                  <ul class="nav navbar-nav">
                    <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
-                     <ul class="dropdown-menu animated zoomIn">
-                         <li class="hvr-grow"><a href="profile.html">Profile</a></li>
-                       <li class="hvr-grow"><a href="../adminlogin/">Logout</a></li>
+                     <a href="#" class="dropdown-toggle hvr-grow" data-toggle="dropdown">Account <b class="caret"></b></a>
+                     <ul class="dropdown-menu">
+                         <li class="hvr-grow"><a  href="profile.html">PROFILE</a></li>
+                       <li class="hvr-grow"><a href="../adminlogin/">LOGOUT</a></li>
                      </ul>
                    </li>
                  </ul>
@@ -62,9 +61,10 @@
       <!-- Main menu -->
       <li class="hvr-float-shadow"><a href="../app/"  ><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
       <li class="hvr-float-shadow"><a href="../competitions/"><i class="glyphicon glyphicon-stats"></i>Competitions</a></li>
-      <li class="hvr-float-shadow"><a href="../activities/"><i class="glyphicon glyphicon-stats"></i> Activities </a></li>
-      <li class="hvr-float-shadow"><a href="../predictions/"><i class="glyphicon glyphicon-signal"></i> Tips</a></li>
-      <li class="hvr-float-shadow"><a href="../maintenance/"><i class="glyphicon glyphicon-tint"></i> Profile</a></li>
+      <li class="hvr-float-shadow"><a href="../restrictions/"><i class="glyphicon glyphicon-stats"></i>Restrictions</a></li>
+      <li class="hvr-float-shadow"><a href="../tips/"><i class="glyphicon glyphicon-signal"></i> Tips</a></li>
+      <li class="hvr-float-shadow"><a href="../tariffs/"><i class="glyphicon glyphicon-signal"></i> Tariffs</a></li>
+      <li class="hvr-float-shadow"><a href="../profile/"><i class="glyphicon glyphicon-tint"></i> Profile</a></li>
     </ul>
     </div>
 		  </div>
@@ -73,6 +73,7 @@
 		{% endblock %}
 
 	</div>
+        </div>
   {% include "app/footer.html" %}
 {% block js %}
     <script src="{% static 'app/js/jquery/jquery.js' %}"></script>

@@ -1,6 +1,6 @@
 import random, csv
-import numpy as np, numpy.random
-from pyswarm import pso
+#import numpy as np, numpy.random
+#from pyswarm import pso
 from datetime import datetime, timedelta
 
 from django.shortcuts import reverse
@@ -15,6 +15,7 @@ from django.views import View
 from rest_framework.test import APIClient
 from api.models import Consumer, Address, Consumption, ConsumerDynamicData
 
+#User APP
 class Home(View):
     template_name = 'app/index.html'
 
@@ -45,8 +46,8 @@ class Login(View):
         """
         return render(request, self.template_name)
     
-class Activities(View):
-    template_name = 'app/activities.html'
+class Restrictions (View):
+    template_name = 'app/restrictions.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -58,8 +59,8 @@ class Activities(View):
         Returns:
 
         """
-        activities = ["Shower/Bath", "Laundry", "Car Wash", "Water the Gardern", "Fill the Pool"]
-        return render(request, self.template_name, {"activities": activities})
+        restrictions = ["Shower/Bath", "Laundry", "Car Wash", "Water the Gardern", "Fill the Pool"]
+        return render(request, self.template_name, {"restrictions": restrictions})
 
 class Competitions(View):
     template_name = 'app/competitions.html'
@@ -76,10 +77,26 @@ class Competitions(View):
         """
         items = [1,2,3,4,5]
         rankings = ["Hourly", "Daily", "Weekly", "Monthly", "Yearly"]
-        return render(request, self.template_name, {"items":items,"rankings":rankings})
+        users = ["Mabu Manaileng", "Asive Dlaba", "Ofentswe Lebogo", "Kagiso Maupye"]
+        return render(request, self.template_name, {"users":users})
     
 class Tips(View):
     template_name = 'app/tips.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+
+        Args:
+            *args:
+            **kwargs:
+
+        Returns:
+
+        """
+        return render(request, self.template_name)    
+    
+class Tariffs (View):
+    template_name = 'app/tariffs.html'
 
     def get(self, request, *args, **kwargs):
         """
@@ -108,6 +125,8 @@ class Profile(View):
         """
         return render(request, self.template_name)
 
+
+#ADMIN APP
 class AdminLogin(View):
     template_name = 'app/login.html'
 
@@ -171,7 +190,7 @@ class Predictions(View):
         """
         return render(request, self.template_name)
     
-    
+#DATA    
 class GenerateRandomData(View):
     """Generate random data which simulates smart meters.
     

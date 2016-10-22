@@ -2126,7 +2126,7 @@ fieldset[disabled] .btn-youtube.active {
   background-color: #fff;
 }
 .nav-tabs > li > a:hover {
-  color: #e91e63;
+  color: #3276b1;
   border-color: transparent;
 }
 .tabs-flip .nav-tabs > li.active > a {
@@ -2292,7 +2292,8 @@ fieldset[disabled] .btn-youtube.active {
 .tabs-vertical-right .nav-tabs {
   float: right;
   display: inline-block;
-  width: 23%;
+  width: 15%;
+  text-align: center;
 }
 .tabs-vertical-right .nav-tabs > li {
   width: 100%;
@@ -2308,7 +2309,7 @@ fieldset[disabled] .btn-youtube.active {
 .tabs-vertical-right .tab-content {
   float: right;
   display: inline-block;
-  width: 77%;
+  width: 85%;
 }
 .tabs-slide-content .tab-content {
   position: relative;

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from app.views import Home, Login, Competitions, Activities, Tips, Profile
+from app.views import Home, Login, Competitions, Restrictions, Tips, Tariffs, Profile
 
 from adminapp.views import AdminDashboard, Predictions, Reports, AdminLogin, \
     Maintenance
@@ -31,8 +31,9 @@ urlpatterns = [
     url(r'^app', Home.as_view()),
     url(r'^login', Login.as_view()),
     url(r'^competitions', Competitions.as_view()),
-    url(r'^activities', Activities.as_view()),
+    url(r'^restrictions', Restrictions.as_view()),
     url(r'^tips', Tips.as_view()),
+    url(r'^tariffs', Tariffs.as_view()),
     url(r'^profile', Profile.as_view()),
     
     # Admin App Views
