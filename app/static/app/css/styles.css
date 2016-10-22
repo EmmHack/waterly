@@ -24,6 +24,11 @@ body {
   margin-top: 30px;
 }
 
+/*Last Div*/
+.last{
+    margin-bottom: 60px;
+}
+
 /* Footer */
 
 footer{
@@ -36,7 +41,11 @@ footer{
    bottom: 0px;
    left:0px;
    right:0px;
+<<<<<<< HEAD
+   position: fixed;
+=======
    position:fixed;
+>>>>>>> 66b276e2a2aaf34f84928e1e05f4c1f60e037725
 }
 
 footer a{
@@ -165,6 +174,7 @@ footer .copy{
 .header .dropdown-menu li a {
    color: #fff;
    padding-left:0px !important;
+   text-transform: capitalize;
 }
 
 .header .dropdown-menu li:last-child{
@@ -604,7 +614,6 @@ body {
 
 /* Mobile phones */
 @media (max-width: 480px){
-
 }
 
 /* Tablets */
@@ -627,7 +636,6 @@ body {
    .navbar-toggle {
       margin-right:0px !important;
    }
-}
 
 /* Desktop */
 
